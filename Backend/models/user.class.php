@@ -1,82 +1,115 @@
 <?php
-class User {
-    private $conn;
 
-    public function __construct($db) {
-        $this->conn = $db;
+class User
+{
+    // Eigenschaften (Attribute) des Benutzers
+    private int $id;
+    private bool $is_admin;
+    private string $first_name;
+    private string $last_name;
+    private string $address;
+    private string $postal_code;
+    private string $city;
+    private string $email;
+    private string $benutzername;
+    private string $password;
+    private bool $active;
+
+    // Konstruktor – wird beim Erstellen eines User-Objekts aufgerufen
+    public function __construct(
+        int $id,
+        bool $is_admin,
+        string $first_name,
+        string $last_name,
+        string $address,
+        string $postal_code,
+        string $city,
+        string $email,
+        string $benutzername,
+        string $password,
+        bool $active
+    ) {
+        $this->id = $id;
+        $this->is_admin = $is_admin;
+        $this->first_name = $first_name;
+        $this->last_name = $last_name;
+        $this->address = $address;
+        $this->postal_code = $postal_code;
+        $this->city = $city;
+        $this->email = $email;
+        $this->benutzername = $benutzername;
+        $this->password = $password;
+        $this->active = $active;
     }
 
-    public function register($vorname, $nachname, $email, $benutzername, $passwort) {
-        $passwort_hash = password_hash($passwort, PASSWORD_BCRYPT);
-        $sql = "INSERT INTO users (vorname, nachname, email, benutzername, passwort) 
-                VALUES (?, ?, ?, ?, ?)";
+    // Getter & Setter
 
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("sssss", $vorname, $nachname, $email, $benutzername, $passwort_hash);
-
-        return $stmt->execute();
+    public function getId(): int {
+        return $this->id;
     }
 
-    public function login($benutzername, $passwort) {
-        $sql = "SELECT * FROM users WHERE benutzername = ?";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("s", $benutzername);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $user = $result->fetch_assoc();
+    public function isAdmin(): bool {
+        return $this->is_admin;
+    }
 
-        if ($user && password_verify($passwort, $user['passwort'])) {
-            return $user;
-        } else {
-            return false;
-        }
+    public function getFirstName(): string {
+        return $this->first_name;
+    }
+
+    public function setFirstName(string $first_name): void {
+        $this->first_name = $first_name;
+    }
+
+    public function getLastName(): string {
+        return $this->last_name;
+    }
+
+    public function setLastName(string $last_name): void {
+        $this->last_name = $last_name;
+    }
+
+    public function getAddress(): string {
+        return $this->address;
+    }
+
+    public function getPostalCode(): string {
+        return $this->postal_code;
+    }
+
+    public function getCity(): string {
+        return $this->city;
+    }
+
+    public function getEmail(): string {
+        return $this->email;
+    }
+
+    public function getBenutzername(): string {
+        return $this->benutzername;
+    }
+
+    public function getPassword(): string {
+        return $this->password;
+    }
+
+    public function isActive(): bool {
+        return $this->active;
+    }
+
+    //  Gibt alle Daten als Array zurück – z. B. für JSON oder Session
+    public function toArray(): array {
+        return [
+            "id" => $this->id,
+            "is_admin" => $this->is_admin,
+            "first_name" => $this->first_name,
+            "last_name" => $this->last_name,
+            "address" => $this->address,
+            "postal_code" => $this->postal_code,
+            "city" => $this->city,
+            "email" => $this->email,
+            "benutzername" => $this->benutzername,
+            "password" => $this->password,
+            "active" => $this->active
+        ];
     }
 }
-?>
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benutzerregistrierung</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="form-container">
-        <h2 class="form-heading">Registrierung</h2>
-
-        <form id="registration-form" method="POST" action="../backend/controllers/register.php">
-        
-
-            <label for="vorname">Vorname:</label>
-            <input type="text" name="vorname" id="vorname" required><br>
-
-            <label for="nachname">Nachname:</label>
-            <input type="text" name="nachname" id="nachname" required><br>
-
-            <label for="adresse">Adresse:</label>
-            <input type="text" name="adresse" id="adresse" required><br>
-
-            <label for="plz">PLZ:</label>
-            <input type="text" name="plz" id="plz" required><br>
-
-            <label for="ort">Ort:</label>
-            <input type="text" name="ort" id="ort" required><br>
-
-            <label for="email">E-Mail-Adresse:</label>
-            <input type="email" name="email" id="email" required><br>
-
-            <label for="benutzername">Benutzername:</label>
-            <input type="text" name="benutzername" id="benutzername" required><br>
-
-            <label for="passwort">Passwort:</label>
-            <input type="password" name="passwort" id="passwort" required><br>
-
-            <label for="passwort_repeat">Passwort wiederholen:</label>
-            <input type="password" name="passwort_repeat" id="passwort_repeat" required><br>
-
-            <button type="submit">Registrieren</button>
-        </form>
-    </div>
-</body>
-</html>
