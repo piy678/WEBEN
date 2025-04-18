@@ -44,7 +44,7 @@ backend/
 │   └── dataHandler.php      → (optional)
 │
 ├── /models/
-│   ├── user.class.php       → Login- & Registrierungslogik
+│   ├── user.class.php       → Darstellen eines Users als Objekt
 │   ├── product.class.php    → Event-Datenmodell
 │   └── cart.class.php       → Warenkorb-Klasse
 │
