@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="login">Benutzername oder E-Mail:</label><br>
+        <input type="text" id="login" name="login" required><br><br>
+
+        <label for="password">Passwort:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <input type="checkbox" id="remember" name="remember">
+        <label for="remember">Login merken</label><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="status"></div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+
+            const response = await fetch("../backend/login.php", {
+                method: "POST",
+                body: formData
+            });
+
+            const result = await response.json();
+            document.getElementById("status").textContent = result.message;
+
+            if (result.success) {
+                setTimeout(() => window.location.href = "index.html", 1000);
+            }
+        });
+    </script>
+</body>
+</html>
