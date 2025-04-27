@@ -1,49 +1,45 @@
-# Sprint 2: 10.04. – 24.04.2025
+# Sprint 3: 24.04. – 15.05.2025
 ## Sprint-Ziel:
-Erweiterung des Webshops um Login-Funktion, Ticketsuche mit Filter und AJAX-basierter Warenkorb.
+Funktionierender Checkout-Prozess inklusive Gutschein-Einlösung und Rechnungserstellung.
 
 ## Aufgabenverteilung:
-### Person A – Login (Fortführung aus Sprint 1)
-Fertigstellung der Login-Funktion (US02)
+### Person A – Bestellung + Gutschein (US05)
+Checkout-Seite erstellen (checkout.html)
 
-Login mit E-Mail/Benutzername + Passwort
+Warenkorb-Übersicht auf Checkout-Seite anzeigen
 
-"Login merken" via Cookie
+Auswahl der Zahlungsmethode integrieren (inklusive Gutschein-Option)
 
-Login-Status sichtbar
+Gutscheincode-Eingabe und Prüfung via useVoucher.php
 
-Logout-Button implementieren
+Gutscheinbetrag vom Gesamtpreis abziehen
 
-Unterschiedliche Navigation je nach Rolle (Gast, User, Admin)
+Bestellung absenden und speichern via submitOrder.php
 
-Backend-Verbindung mit Login-Validierung
+Session-Warenkorb nach erfolgreicher Bestellung leeren
 
-Session-Handling + Cookie-Handling
+Fehlerbehandlung bei fehlerhaftem Gutschein oder fehlgeschlagener Bestellung
 
-Tests & Debugging
+Tests & Debugging für Bestell- und Gutscheinprozess
 
-### Person B – Tickets + Filterfunktion (US03)
-Frontend-Anzeige von Tickets (Name, Bild, Preis, Bewertung)
+### Person B – Bestellübersicht + Rechnungen (US06)
+"Meine Bestellungen"-Seite erstellen (myorders.html)
 
-Kategorie-Filter implementieren (Dropdown oder Buttons)
+Bestellungen via AJAX dynamisch laden (getOrders.php)
 
-Suche mit "Live Search" (Continuous Search via AJAX)
+Einzelrechnungen pro Bestellung anbieten (Button "Rechnung anzeigen")
 
-Dynamisches Nachladen von Tickets ohne Page Reload
+Rechnungserstellung auf Serverseite (generateInvoice.php)
 
-Datenbindung ans Backend (Produktdaten aus DB laden)
+Schöne Darstellung der Rechnung (invoice.html)
 
-UX-Optimierung (Responsive Design, gute Darstellung)
+Rechnung drucken oder speichern ermöglichen
 
-### Person C – Warenkorb (US04)
-Produkte in Warenkorb legen
+Responsive Design für Bestellübersicht und Rechnungen sicherstellen
 
-AJAX-Integration: keine Seiten-Reloads
+Tests & Debugging für Bestellübersicht und Rechnungen
 
-Live-Zähler neben Warenkorbsymbol
+User Stories im Sprint:
+US05: Als User möchte ich Tickets bestellen und mit Gutschein bezahlen können.
 
-Warenkorbseite: Übersicht aller Artikel, Anzahl anpassen, löschen
-
-Gesamtpreisberechnung
-
-Vorbereitung auf späteren Bestellprozess (Datenstruktur)
+US06: Als User möchte ich meine Bestellungen und Rechnungen einsehen können.
