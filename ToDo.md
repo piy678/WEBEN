@@ -39,7 +39,8 @@ Responsive Design für Bestellübersicht und Rechnungen sicherstellen
 
 Tests & Debugging für Bestellübersicht und Rechnungen
 
-User Stories im Sprint:
+### User Stories im Sprint:
+
 US05: Als User möchte ich Tickets bestellen und mit Gutschein bezahlen können.
 
 US06: Als User möchte ich meine Bestellungen und Rechnungen einsehen können.
