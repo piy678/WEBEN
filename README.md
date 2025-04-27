@@ -27,6 +27,9 @@ frontend/
 │   ├── register.js          → Registrierung via AJAX
 │   ├── tickets.js           → Suche + Anzeige von Tickets
 │   └── cart.js              → Warenkorb-Logik
+│   ├── checkout.js              → Bestellung abschicken, Gutschein einlösen 
+│   ├── myorders.js              → Eigene Bestellungen anzeigen 
+│   └── invoice.js               → Rechnung laden/anzeigen 
 │
 ├── /sites/
 │   ├── login.html
@@ -34,6 +37,9 @@ frontend/
 │   ├── tickets.html
 │   ├── cart.html
 │   └── account.html
+│   ├── checkout.html            → Checkout-Seite 
+│   ├── myorders.html            → Bestellhistorie anzeigen 
+│   └── invoice.html             → Einzelrechnung anzeigen 
  ``` 
 ### Backend (`/`)
  ``` 
@@ -47,6 +53,9 @@ backend/
 │   ├── user.class.php       → Darstellen eines Users als Objekt
 │   ├── product.class.php    → Event-Datenmodell
 │   └── cart.class.php       → Warenkorb-Klasse
+│   ├── order.class.php          → Bestellung-Objekt 
+│   ├── voucher.class.php        → Gutschein-Objekt 
+│   └── invoice.class.php        → Rechnungs-Objekt 
 │
 ├── /logic/
 │   ├── login.php            → verarbeitet Login (POST)
@@ -54,6 +63,10 @@ backend/
 │   ├── searchTickets.php    → liefert Tickets als JSON (GET)
 │   ├── addToCart.php        → AJAX-Warenkorb hinzufügen
 │   └── getCartItems.php     → gibt Warenkorb-Daten als JSON zurück
+│   ├── submitOrder.php          → Bestellung speichern (Session → DB) 
+│   ├── getOrders.php            → Bestellungen eines Users abrufen 
+│   ├── useVoucher.php           → Gutscheincode prüfen und anwenden 
+│   └── generateInvoice.php      → Rechnung erzeugen für eine Bestellung 
 │
 ├── /productpictures/
 │   └── *.png                → Ticket/Event-Bilder
