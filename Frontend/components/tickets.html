@@ -22,7 +22,7 @@
   <script>
     document.getElementById("category").addEventListener("change", function() {
       const category = this.value;
-      fetch("php/getTickets.php?category=" + category)
+      fetch("../../Backend/logic/getTickets.php?category=" + category)
         .then(res => res.json())
         .then(data => {
           const container = document.getElementById("ticket-list");
