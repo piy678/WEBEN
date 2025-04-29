@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrierung</title>
+</head>
+<body>
+  <h2>Registrierung</h2>
+  <form id="registerForm">
+    <input type="text" id="vorname" placeholder="Vorname" required><br>
+    <input type="text" id="nachname" placeholder="Nachname" required><br>
+    <input type="text" id="adresse" placeholder="Adresse" required><br>
+    <input type="text" id="plz" placeholder="PLZ" required><br>
+    <input type="text" id="ort" placeholder="Ort" required><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="text" id="benutzername" placeholder="Benutzername" required><br>
+    <input type="password" id="password" placeholder="Passwort" required><br>
+    <input type="password" id="passwordRepeat" placeholder="Passwort wiederholen" required><br>
+    <label for="zahlung">Zahlungsmethode:</label>
+    <select id="zahlung" name="zahlung" required>
+      <option value="">Bitte wählen</option>
+      <option value="Rechnung">Rechnung</option>
+      <option value="PayPal">PayPal</option>
+      <option value="Kreditkarte">Kreditkarte</option>
+    </select>
+    
+    <button type="submit">Registrieren</button>
+  </form>
+  <script src="../js/registration.js"></script>
+</body>
+</html>
