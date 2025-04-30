@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../config/dbaccess.php'; 
+require_once '../config/db.php'; 
 
 $identifier = $_POST['login'] ?? ''; 
 $password = $_POST['password'] ?? '';
