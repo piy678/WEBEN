@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="../res/css/style.css">
+</head>
+<body>
+  <h2>Checkout</h2>
+
+  <div id="cart-summary">
+    <!-- Warenkorb-Übersicht wird geladen -->
+  </div>
+
+  <label for="voucher">Gutscheincode:</label>
+  <input type="text" id="voucher" placeholder="Gutschein eingeben">
+  <button onclick="applyVoucher()">Gutschein anwenden</button>
+
+  <h3>Gesamtpreis: <span id="total-price">0 €</span></h3>
+
+  <button onclick="submitOrder()">Jetzt Bestellen</button>
+
+  <script src="../js/checkout.js"></script>
+</body>
+</html>

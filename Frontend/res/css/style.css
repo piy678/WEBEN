@@ -1,0 +1,108 @@
+/* Allgemeines Styling für die Seite */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container für das Formular */
+form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Überschrift des Formulars */
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Labels für die Eingabefelder */
+label {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* Eingabefelder */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* Passwort-Wiederholung und Fehlermeldung */
+input[type="password"] {
+    display: inline-block;
+    width: calc(50% - 8px);
+    margin-right: 16px;
+}
+
+input[type="password"]:last-of-type {
+    margin-right: 0;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 14px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Fehlernachricht */
+.error {
+    color: #f44336;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+/* Formularkomplettierung */
+form input:focus, form select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Zusätzliche Anpassungen für kleinere Bildschirme */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+    
+    form {
+        padding: 20px;
+    }
+}
