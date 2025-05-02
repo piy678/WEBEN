@@ -27,16 +27,13 @@ document.getElementById("registerForm").addEventListener("submit", async functio
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(user)
       })
-      .then(res => res.json())
-      .then(data => {
-        alert(data.message);
-        if (data.success) {
-          window.location.href = "login.html";
-        }
-      })
-      .catch(error => {
-        console.error("Fehler bei der Registrierung:", error);
-      });
+      .then(res => res.text()) // NICHT sofort .json()
+.then(txt => {
+  console.log("🔍 Antwort vom Server (raw):", txt); // <-- Wichtig!
+})
+.catch(err => {
+  console.error("Fehler bei der Registrierung:", err);
+});
       
   });
   

@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
 //alle Produkte im Warenkorb zurückgeben, Produkte aus dem Backend laden und anzeigen
 function loadCart() {
   fetch("../../backend/logic/getCartItems.php")
-    .then(response => response.json()) //Antwort verarbeiten
-    .then(data => {
+  .then(res => res.text())
+  .then(txt => {
+    console.log("Antwort vom Server:", txt);  // was PHP zurückgibt
+    const data = JSON.parse(txt); 
       const container = document.getElementById("cart-items");
       container.innerHTML = "";
 
