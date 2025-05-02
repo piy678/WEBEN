@@ -2,9 +2,15 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login-Seite für SmartTicketing. Melden Sie sich an, um Tickets zu kaufen und Ihre Bestellungen zu verwalten.">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../res/css/style.css">
 </head>
 <body>
+    <div class="container mt-5">
+        <div class="card p-4 mx-auto" style="max-width: 400px;">
     <h2>Login</h2>
     <form id="loginForm" action="../../Backend/logic/login.php" method="post">
         <label for="login">Benutzername oder E-Mail:</label><br>
@@ -18,7 +24,8 @@
 
         <button type="submit">Login</button>
     </form>
-
+        </div>
+        </div>
     <script src="../js/login.js"></script>
     <script src="../js/script.js"></script>
 </body>
