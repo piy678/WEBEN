@@ -10,7 +10,7 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      fetch("/WEBEN-main/backend/logic/getOrders.php") 
+      fetch("../../Backend/logic/getOrders.php")
         .then(res => res.json())
         .then(orders => {
           const container = document.getElementById("order-list");
@@ -27,6 +27,7 @@
                 <strong>Bestellung #${order.id}</strong><br>
                 Datum: ${order.created_at} – Gesamt: ${order.total_price} €<br>
                 <button onclick="showOrderDetails(${order.id})">Details</button>
+                <button onclick="window.location.href='invoice.html?order_id=${order.id}'">Rechnung anzeigen</button>
               </div>
               <hr>
             `;
@@ -39,7 +40,7 @@
     });
 
     function showOrderDetails(orderId) {
-  fetch(`../../backend/logic/getOrderItems.php?orderId=${orderId}`)
+      fetch(`../../Backend/logic/getOrderItems.php?order_id=${orderId}`)
     .then(res => res.json())
     .then(items => {
       if (items.length === 0) {

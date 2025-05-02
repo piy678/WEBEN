@@ -1,16 +1,23 @@
 <?php
-header('Content-Type: application/json');
-require_once(__DIR__ . '/../config/db.php');
+session_start();
+header("Content-Type: application/json");
+require_once("../config/db.php");
 
-$orderId = isset($_GET['orderId']) ? intval($_GET['orderId']) : 0;
+$userId = $_SESSION["user_id"] ?? null;
+$orderId = $_GET["order_id"] ?? null;
 
-if (!$orderId) {
+if (!$userId || !$orderId) {
     echo json_encode([]);
     exit;
 }
 
-$stmt = $mysqli->prepare("SELECT title, price, quantity FROM order_items WHERE order_id = ?");
-$stmt->bind_param("i", $orderId);
+$stmt = $mysqli->prepare("
+  SELECT oi.title, oi.quantity, oi.price
+  FROM order_items oi
+  JOIN orders o ON oi.order_id = o.id
+  WHERE oi.order_id = ? AND o.user_id = ?
+");
+$stmt->bind_param("ii", $orderId, $userId);
 $stmt->execute();
 
 $result = $stmt->get_result();
@@ -21,4 +28,3 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode($items);
-?>

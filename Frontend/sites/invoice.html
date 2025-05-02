@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Rechnung</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2em;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+
+    @media print {
+      #print-btn {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Rechnung</h1>
+  <div id="invoice-data"></div> 
+  <button id="print-btn" onclick="window.print()">Als PDF speichern</button>
+
+  <script src="../js/invoice.js"></script>
+  <script src="../js/script.js"></script>
+</body>
+</html>
+

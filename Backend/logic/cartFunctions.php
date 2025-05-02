@@ -12,7 +12,7 @@ function getProductById($id) {
 
     $id = intval($id); 
 
-    $query = "SELECT id, title, price FROM products WHERE id = $id";
+    $query = "SELECT id, title, price FROM tickets WHERE id = $id";
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
