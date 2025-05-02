@@ -12,7 +12,7 @@ if (!$identifier || !$password) {
 }
 
 // Verbindung aufbauen
-$conn = new mysqli($host, $dbuser, $dbpass, $database);
+$conn = new mysqli($host, $user, $pass, $dbname);
 
 // Verbindung prüfen
 if ($conn->connect_error) {
@@ -20,13 +20,13 @@ if ($conn->connect_error) {
 }
 
 // Sicheres Statement vorbereiten
-$stmt = $conn->prepare("SELECT id, username, email, password, role FROM users WHERE username = ? OR email = ?");
+$stmt = $conn->prepare("SELECT id, benutzername, email, passwort, is_admin FROM benutzer WHERE benutzername = ? OR email = ?");
 $stmt->bind_param("ss", $identifier, $identifier);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($user = $result->fetch_assoc()) {
-    if (password_verify($password, $user['password'])) {
+    if (password_verify($password, $user['passwort'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['role'] = $user['role'];
@@ -35,7 +35,8 @@ if ($user = $result->fetch_assoc()) {
             setcookie('remember_me', $user['id'], time() + (86400 * 30), "/");
         }
 
-        header("Location: ../../Frontend/index.html");
+        header("Location: ../../Frontend/sites/tickets.html");
+
         exit;
     } else {
         header("Location: ../../Frontend/sites/login.html?error=invalid");

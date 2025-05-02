@@ -18,7 +18,6 @@
   <div id="ticket-list">
     <!-- AJAX lädt hier Tickets -->
   </div>
-  <script src="../js/script.js"></script>
   <script>
     document.getElementById("category").addEventListener("change", function() {
       const category = this.value;
@@ -32,12 +31,42 @@
           } else {
             data.forEach(ticket => {
               const div = document.createElement("div");
-              div.innerHTML = `<strong>${ticket.title}</strong> – ${ticket.price} €`;
-              container.appendChild(div);
+              div.innerHTML = `
+              <strong>${ticket.title}</strong> – ${ticket.price} €
+            `;
+            const button = document.createElement("button");
+            button.textContent = "In den Warenkorb";
+            button.addEventListener("click", () => {
+              addToCart(ticket.id, ticket.title, ticket.price);
             });
+            div.appendChild(button);
+            container.appendChild(div);
+          });
           }
         });
     });
+
+    function addToCart(id, title, price) {
+    fetch("../../Backend/logic/addToCart.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+        title: title,
+        price: price,
+        quantity: 1
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      alert(data.message || "Ticket wurde dem Warenkorb hinzugefügt!");
+    })
+    .catch(err => {
+      console.error("Fehler beim Hinzufügen:", err);
+      alert("Fehler beim Hinzufügen zum Warenkorb.");
+    });
+  }
   </script>
+  <script src="../js/script.js"></script>
 </body>
 </html>

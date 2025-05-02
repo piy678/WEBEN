@@ -15,7 +15,12 @@ if (!isset($_SESSION["cart"])) {
 }
 
 if (!isset($_SESSION["cart"][$id])) {
-    $_SESSION["cart"][$id] = ["id" => $id, "quantity" => 1];
+    $_SESSION["cart"][$id] = [
+        "id" => $id,
+        "title" => $data["title"],
+        "price" => $data["price"],
+        "quantity" => 1
+      ];
 } else {
     $_SESSION["cart"][$id]["quantity"]++;
 }

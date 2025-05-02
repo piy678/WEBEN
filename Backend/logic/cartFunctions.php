@@ -1,6 +1,9 @@
 <?php
 session_start();
+header('Content-Type: application/json');
 
+$cart = $_SESSION["cart"] ?? [];
+echo json_encode(array_values($cart));
 // Produktdetails holen 
 require_once("../config/db.php"); 
 

@@ -33,7 +33,7 @@ foreach ($required as $field) {
 $hash = password_hash($data['password'], PASSWORD_DEFAULT);
 
 // SQL vorbereiten
-$stmt = $mysqli->prepare("INSERT INTO users (vorname, nachname, adresse, plz, ort, email, benutzername, password, zahlung) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+$stmt = $mysqli->prepare("INSERT INTO benutzer (vorname, nachname, adresse, plz, ort, email, benutzername, passwort, zahlungsmethode) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if (!$stmt) {
     echo json_encode(["success" => false, "message" => "SQL-Fehler: " . $mysqli->error]);
     exit;
