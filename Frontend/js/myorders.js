@@ -1,5 +1,5 @@
 function loadOrders() {
-    fetch("../../backend/logic/getOrders.php")
+    fetch("../../Backend/logic/getOrders.php")
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById("orders");

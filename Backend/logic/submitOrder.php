@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once("../config/dbacess.php");
+require_once("../config/db.php");
 
 if (!isset($_SESSION["cart"]) || empty($_SESSION["cart"])) {
     echo json_encode(["success" => false, "message" => "Warenkorb ist leer."]);
@@ -21,8 +21,8 @@ if (isset($_SESSION["voucher"])) {
 }
 
 // Bestellung in DB speichern
-mysqli_query($conn, "INSERT INTO orders (user_id, total_price, created_at) VALUES ($userId, $total, NOW())");
-$orderId = mysqli_insert_id($conn);
+mysqli_query($mysqli, "INSERT INTO orders (user_id, total_price, created_at) VALUES ($userId, $total, NOW())");
+$orderId = mysqli_insert_id($mysqli);
 
 // Bestellpositionen speichern
 foreach ($_SESSION["cart"] as $item) {
@@ -31,13 +31,13 @@ foreach ($_SESSION["cart"] as $item) {
     $price = $item["price"];
     $quantity = $item["quantity"];
 
-    mysqli_query($conn, "INSERT INTO order_items (order_id, product_id, title, price, quantity) VALUES ($orderId, $pid, '$title', $price, $quantity)");
+    mysqli_query($mysqli, "INSERT INTO order_items (order_id, product_id, title, price, quantity) VALUES ($orderId, $pid, '$title', $price, $quantity)");
 }
 
 // Gutschein als verwendet markieren
 if (isset($_SESSION["voucher"])) {
     $voucherId = $_SESSION["voucher"]["id"];
-    mysqli_query($conn, "UPDATE vouchers SET used = 1 WHERE id = $voucherId");
+    mysqli_query($mysqli, "UPDATE vouchers SET used = 1 WHERE id = $voucherId");
 }
 
 // Warenkorb leeren

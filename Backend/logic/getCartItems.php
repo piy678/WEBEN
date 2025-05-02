@@ -1,21 +1,19 @@
 <?php
 session_start();
-require_once("Backend\logic\cartFunctions.php"); // enthält getProductById()
+header("Content-Type: application/json");
 
+// Session-Warenkorb prüfen
 $cart = $_SESSION["cart"] ?? [];
+
 $result = [];
 
 foreach ($cart as $item) {
-    $product = getProductById($item["id"]); // Funktion, die Produktdetails zurückgibt 
-    if ($product) {
-        $result[] = [
-            "id" => $item["id"],
-            "title" => $product["title"],
-            "price" => $product["price"],
-            "quantity" => $item["quantity"]
-        ];
+    if (
+        isset($item["id"], $item["title"], $item["price"], $item["quantity"])
+    ) {
+        $result[] = $item;
     }
 }
 
-header("Content-Type: application/json");
+// Gültiges JSON ausgeben
 echo json_encode($result);
