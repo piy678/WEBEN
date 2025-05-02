@@ -1,16 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="../sites/index.html">
-            <img src="../res/img/logo.png" alt="Logo" height="40" class="me-2">
-        SmartTicketing
-      </a>
-        <!-- <a href=".html">Shop</a>-->
-        <a href="login.html">Login</a>
-     
-      <!-- Navigation rechts -->
-      <ul class="navbar-nav ms-auto"></ul>
-    </div>
-  </nav>
-  
-  
-  
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $page_title ?? 'Meine Seite'; ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../sites/index.html">
+                <img src="../res/img/logo.png" alt="Logo" style="height: 40px;"> 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Navigation ein-/ausblenden">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="../sites/login.html">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../sites/registration.html">Registrierung</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>

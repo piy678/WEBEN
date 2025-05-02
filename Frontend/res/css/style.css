@@ -5,10 +5,10 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    flex-direction: column;
+    min-height: 100vh;
 }
+
 
 /* Container für das Formular */
 form {
@@ -107,12 +107,7 @@ button:disabled {
     }
 }
 
-/* Layout-Anpassung für Seiten mit Header und Footer */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
+
 
 /* Header-Bereich */
 header {
@@ -152,9 +147,18 @@ footer {
 
 /* Main-Inhalt */
 main {
-    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
+    flex: 1;
+}
+
+form {
+    width: 100%;
+    max-width: 500px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
