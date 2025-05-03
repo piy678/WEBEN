@@ -22,10 +22,14 @@ function loadCartSummary() {
 function applyVoucher() {
   const code = document.getElementById("voucher").value;
 
+  // Aktuellen Preis extrahieren (aus dem DOM, z. B. "19.99 €" → 19.99)
+  const priceText = document.getElementById("total-price").textContent;
+  const total = parseFloat(priceText.replace("€", "").trim());
+
   fetch("../../backend/logic/useVoucher.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ code })
+    body: JSON.stringify({ code, total })
   })
     .then(res => res.json())
     .then(data => {
@@ -37,6 +41,7 @@ function applyVoucher() {
       }
     });
 }
+
 
 function submitOrder() {
   fetch("../../backend/logic/submitOrder.php", { method: "POST" })
