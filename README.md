@@ -29,7 +29,8 @@ frontend/
 │   └── cart.js              → Warenkorb-Logik
 │   ├── checkout.js              → Bestellung abschicken, Gutschein einlösen 
 │   ├── myorders.js              → Eigene Bestellungen anzeigen 
-│   └── invoice.js               → Rechnung laden/anzeigen 
+│   └── invoice.js               → Rechnung laden/anzeigen
+│   └── **productAdmin.js**        ← NEU: Logik für Produktverwaltung (AJAX)
 │
 ├── /sites/
 │   ├── login.html
@@ -39,7 +40,8 @@ frontend/
 │   └── account.html
 │   ├── checkout.html            → Checkout-Seite 
 │   ├── myorders.html            → Bestellhistorie anzeigen 
-│   └── invoice.html             → Einzelrechnung anzeigen 
+│   └── invoice.html             → Einzelrechnung anzeigen
+│   └── **products_admin.html**    ← NEU: Admin-Seite für Produktpflege
  ``` 
 ### Backend (`/`)
  ``` 
@@ -66,7 +68,11 @@ backend/
 │   ├── submitOrder.php          → Bestellung speichern (Session → DB) 
 │   ├── getOrders.php            → Bestellungen eines Users abrufen 
 │   ├── useVoucher.php           → Gutscheincode prüfen und anwenden 
-│   └── generateInvoice.php      → Rechnung erzeugen für eine Bestellung 
+│   └── generateInvoice.php      → Rechnung erzeugen für eine Bestellung
+│   ├── **addProduct.php**         ← NEU: Produkt anlegen (mit Bild)
+│   ├── **updateProduct.php**      ← NEU: Produkt bearbeiten
+│   ├── **deleteProduct.php**      ← NEU: Produkt löschen
+│   └── **getProducts.php**        ← NEU: Produktliste für Admin laden
 │
 ├── /productpictures/
 │   └── *.png                → Ticket/Event-Bilder
