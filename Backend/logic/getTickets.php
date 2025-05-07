@@ -8,10 +8,11 @@ $category = isset($_GET['category']) ? $_GET['category'] : 'all';
 $tickets = [];
 
 if ($category === 'all') {
-    $sql = "SELECT id, title, price FROM tickets";
+    $sql = "SELECT id, title, category, price, image, rating FROM tickets";
+
     $result = $mysqli->query($sql); 
 } else {
-    $stmt = $mysqli->prepare("SELECT id, title, price FROM tickets WHERE LOWER(category) = LOWER(?)"); 
+    $stmt = $mysqli->prepare("SELECT id, title, category, price, image, rating FROM tickets WHERE LOWER(category) = LOWER(?)");
     $stmt->bind_param("s", $category);
     $stmt->execute();
     $result = $stmt->get_result();

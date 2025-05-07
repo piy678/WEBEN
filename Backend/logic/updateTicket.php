@@ -1,9 +1,13 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+header('Content-Type: application/json');
+
 require_once('../config/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
-    $title = $_POST['title'];
+    $title = $_POST['name'];
     $category = $_POST['category'];
     $price = $_POST['price'];
     $imageName = $_POST['currentImage'];

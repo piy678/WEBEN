@@ -18,7 +18,6 @@ function loadOrders() {
   }
   
   function showOrderDetails(orderId) {
-    // TODO: hier kannst du fetch machen zu z.B. getOrderItems.php?orderId=...
     alert("Details für Bestellung " + orderId + " werden später angezeigt.");
   }
   

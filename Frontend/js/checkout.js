@@ -26,7 +26,7 @@ function applyVoucher() {
   const priceText = document.getElementById("total-price").textContent;
   const total = parseFloat(priceText.replace("€", "").trim());
 
-  fetch("../../backend/logic/useVoucher.php", {
+  fetch("../../Backend/logic/useVoucher.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ code, total })
@@ -44,7 +44,7 @@ function applyVoucher() {
 
 
 function submitOrder() {
-  fetch("../../backend/logic/submitOrder.php", { method: "POST" })
+  fetch("../../Backend/logic/submitOrder.php", { method: "POST" })
     .then(res => res.json())
     .then(data => {
       if (data.success) {
