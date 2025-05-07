@@ -1,4 +1,4 @@
-# **Sprint 4: 15.05. – 21.05.2025**
+# **Sprint 4: 07.05. – 11.05.2025**
 
 **Sprint-Ziel:**
 Adminbereich mit Event-, Kunden- & Gutscheinverwaltung
