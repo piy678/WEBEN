@@ -1,46 +1,56 @@
-# Sprint 3: 24.04. – 15.05.2025
-## Sprint-Ziel:
-Funktionierender Checkout-Prozess inklusive Gutschein-Einlösung und Rechnungserstellung.
+# **Sprint 4: 15.05. – 21.05.2025**
 
-## Aufgabenverteilung:
-### Person A – Bestellung + Gutschein (US05)
-Checkout-Seite erstellen (checkout.html)
+**Sprint-Ziel:**
+Adminbereich mit Event-, Kunden- & Gutscheinverwaltung
 
-Warenkorb-Übersicht auf Checkout-Seite anzeigen
+---
 
-Auswahl der Zahlungsmethode integrieren (inklusive Gutschein-Option)
+### **Person A – Eventverwaltung (US07)**
 
-Gutscheincode-Eingabe und Prüfung via useVoucher.php
+**Zuständig für:** Admin-Funktion Events/Tickets
+**Aufgaben:**
 
-Gutscheinbetrag vom Gesamtpreis abziehen
+* Adminseite „Events verwalten“ erstellen (events\_admin.html)
+* Events erfassen, bearbeiten, löschen (addEvent.php, updateEvent.php, deleteEvent.php)
+* Eventliste dynamisch anzeigen (getEvents.php)
+* Validierung von Eingaben und Fehlerbehandlung
+* Filter-/Suchfunktion für Events
+* Tests & Debugging der Eventverwaltung
 
-Bestellung absenden und speichern via submitOrder.php
+---
 
-Session-Warenkorb nach erfolgreicher Bestellung leeren
+### **Person B – Kundenverwaltung (US08)**
 
-Fehlerbehandlung bei fehlerhaftem Gutschein oder fehlgeschlagener Bestellung
+**Zuständig für:** Admin-Funktion Kunden
+**Aufgaben:**
 
-Tests & Debugging für Bestell- und Gutscheinprozess
+* Adminseite „Kunden verwalten“ erstellen (customers\_admin.html)
+* Kundendaten laden und anzeigen (getCustomers.php)
+* Kunden bearbeiten/löschen (editCustomer.php, deleteCustomer.php)
+* Benutzerfreundliche Tabellenansicht mit Sortierung und Suche
+* Validierung von Eingaben und Fehlerbehandlung
+* Tests & Debugging der Kundenverwaltung
 
-### Person B – Bestellübersicht + Rechnungen (US06)
-"Meine Bestellungen"-Seite erstellen (myorders.html)
+---
 
-Bestellungen via AJAX dynamisch laden (getOrders.php)
+### **Person C – Gutscheinverwaltung (US09)**
 
-Einzelrechnungen pro Bestellung anbieten (Button "Rechnung anzeigen")
+**Zuständig für:** Admin-Funktion Gutscheine
+**Aufgaben:**
 
-Rechnungserstellung auf Serverseite (generateInvoice.php)
+* Adminseite „Gutscheine verwalten“ erstellen (vouchers\_admin.html)
+* Gutscheine erstellen, einsehen, deaktivieren (addVoucher.php, getVouchers.php, deactivateVoucher.php)
+* Prüfung von Gültigkeit und Status
+* UI zur Anzeige von eingelösten/aktiven Gutscheinen
+* Fehlerbehandlung und Validierung
+* Tests & Debugging der Gutscheinverwaltung
 
-Schöne Darstellung der Rechnung (invoice.html)
+---
 
-Rechnung drucken oder speichern ermöglichen
+**User Stories im Sprint:**
 
-Responsive Design für Bestellübersicht und Rechnungen sicherstellen
+* **US07**: Als Admin möchte ich Events/Tickets verwalten können.
+* **US08**: Als Admin möchte ich Kundenkonten verwalten können.
+* **US09**: Als Admin möchte ich Gutscheine verwalten können.
 
-Tests & Debugging für Bestellübersicht und Rechnungen
 
-### User Stories im Sprint:
-
-US05: Als User möchte ich Tickets bestellen und mit Gutschein bezahlen können.
-
-US06: Als User möchte ich meine Bestellungen und Rechnungen einsehen können.
