@@ -21,7 +21,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
       zahlung: document.getElementById("zahlung").value
     };
   
-    fetch("http://localhost/Projekt/ProjektGruppe28/Backend/logic/registration.php", {
+    fetch("../../Backend/logic/registration.php", {
 
         method: "POST",
         headers: { "Content-Type": "application/json" },
