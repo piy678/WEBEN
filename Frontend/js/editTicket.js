@@ -48,7 +48,7 @@ document.getElementById('editForm').addEventListener('submit', async (e) => {
     result.status === 'success' ? "Gespeichert!" : `Fehler: ${result.message || "Unbekannter Fehler"}`;
 
   if (result.status === 'success') {
-    window.location.href = 'products_admin.html';
+    window.location.href = 'products_admin.php';
   }
   } catch (err) {
     console.error("Fehler beim Senden des Formulars:", err);

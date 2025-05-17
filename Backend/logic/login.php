@@ -36,14 +36,20 @@ if ($user = $result->fetch_assoc()) {
     if (password_verify($password, $user['passwort'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['benutzername'];
-        $_SESSION['role'] = $user['is_admin'] ? "admin" : "user";
+        $_SESSION['username'] = $user['benutzername'];
+        //$_SESSION['role'] = $user['is_admin'] ? "admin" : "user";
+        $_SESSION['is_admin'] = $user['is_admin']; 
 
         if ($remember) {
             setcookie('remember_me', $user['id'], time() + (86400 * 30), "/");
         }
 
+         if ($user['is_admin']) {
+        header("Location: ../../Frontend/sites/products_admin.php");
+    } else {
         header("Location: ../../Frontend/sites/tickets.html");
-        exit;
+    }
+    exit;
     } else {
         header("Location: ../../Frontend/sites/login.html?error=invalid");
         exit;
