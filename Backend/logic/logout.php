@@ -9,4 +9,7 @@ setcookie("remember_me", "", time() - 3600, "/");
 // WICHTIG: Nur JSON ausgeben!
 header("Content-Type: application/json");
 echo json_encode(["success" => true]);
+header("Location: ../../Frontend/sites/index.html");
+exit;
+
 

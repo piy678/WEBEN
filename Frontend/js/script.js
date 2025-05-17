@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // HEADER einfügen
-    fetch("../components/header.html")
+    fetch("../components/header.php")
       .then(res => res.text())
       .then(html => {
         const wrapper = document.createElement("div");
