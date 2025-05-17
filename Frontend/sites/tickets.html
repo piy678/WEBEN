@@ -2,71 +2,122 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tickets durchsuchen</title>
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
 <body>
-  <h2>Tickets nach Kategorien</h2>
+  <h2>Tickets Suchen</h2>
   <label for="category">Kategorie wählen:</label>
   <select id="category">
     <option value="all">Alle</option>
     <option value="musik">Musik</option>
     <option value="theater">Theater</option>
     <option value="sport">Sport</option>
+    <option value="konzert">Konzert</option>
   </select>
 
-  <div id="ticket-list">
-    <!-- AJAX lädt hier Tickets -->
-  </div>
-  <script>
-    document.getElementById("category").addEventListener("change", function() {
-      const category = this.value;
-      fetch("../../Backend/logic/getTickets.php?category=" + category)
-        .then(res => res.json())
-        .then(data => {
-          const container = document.getElementById("ticket-list");
-          container.innerHTML = "";
-          if (data.length === 0) {
-            container.innerHTML = "<p>Keine Tickets gefunden.</p>";
-          } else {
-            data.forEach(ticket => {
-              const div = document.createElement("div");
-              div.innerHTML = `
-              <strong>${ticket.title}</strong> – ${ticket.price} €
-            `;
-            const button = document.createElement("button");
-            button.textContent = "In den Warenkorb";
-            button.addEventListener("click", () => {
-              addToCart(ticket.id, ticket.title, ticket.price);
-            });
-            div.appendChild(button);
-            container.appendChild(div);
-          });
-          }
-        });
-    });
+<!-- Such- & Filterelemente -->
+<input type="text" id="search" placeholder="Titel suchen..." />
 
-    function addToCart(id, title, price) {
-    fetch("../../Backend/logic/addToCart.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        id: id,
-        title: title,
-        price: price,
-        quantity: 1
-      })
-    })
+<label>Min Preis:</label>
+<input type="number" id="priceMin" />
+
+<label>Max Preis:</label>
+<input type="number" id="priceMax" />
+
+<label>Mind. Bewertung:</label>
+<select id="rating">
+  <option value="0">Alle</option>
+  <option value="1">1+</option>
+  <option value="2">2+</option>
+  <option value="3">3+</option>
+  <option value="4">4+</option>
+  <option value="5">5</option>
+</select>
+
+<label>
+  <input type="checkbox" id="onlyAvailable" />
+  Nur verfügbare anzeigen
+</label>
+
+<button onclick="loadTickets()">Filtern</button>
+
+<!-- Bereich für Ticket-Anzeige -->
+<div id="ticket-list"></div>
+
+  
+  
+  <script>
+document.addEventListener("DOMContentLoaded", loadTickets);
+
+function loadTickets() {
+  const category = document.getElementById("category").value;
+  const search = document.getElementById("search").value;
+  const minPrice = document.getElementById("priceMin").value;
+  const maxPrice = document.getElementById("priceMax").value;
+  const rating = document.getElementById("rating").value;
+  const available = document.getElementById("onlyAvailable").checked ? 1 : 0;
+
+  const params = new URLSearchParams({
+    category,
+    search,
+    minPrice,
+    maxPrice,
+    rating,
+    available
+  });
+
+  const url = "../../Backend/logic/getTickets.php?" + params.toString();
+  console.log("→ Anfrage an:", url); // DEBUG
+
+  fetch(url)
     .then(res => res.json())
-    .then(data => {
-      alert(data.message || "Ticket wurde dem Warenkorb hinzugefügt!");
-    })
+    .then(data => updateTicketList(data))
     .catch(err => {
-      console.error("Fehler beim Hinzufügen:", err);
-      alert("Fehler beim Hinzufügen zum Warenkorb.");
+      console.error("Fehler beim JSON-Parsing oder Laden:", err);
     });
+}
+
+
+function updateTicketList(data) {
+  const container = document.getElementById("ticket-list");
+  container.innerHTML = "";
+
+  if (data.length === 0) {
+    container.innerHTML = "<p>Keine Tickets gefunden.</p>";
+    return;
   }
-  </script>
+
+  data.forEach(ticket => {
+    const div = document.createElement("div");
+    const imagePath = ticket.image && ticket.image.trim() !== ""
+      ? `../../Backend/productpictures/${ticket.image}`
+      : "../res/img/placeholder.jpg";
+
+    div.innerHTML = `
+      <img src="${imagePath}" width="120" />
+      <p><strong>${ticket.title}</strong></p>
+      <p>${ticket.price} € – ${ticket.rating}★</p>
+      <button onclick="addToCart(${ticket.id}, '${ticket.title}', ${ticket.price})">In den Warenkorb</button>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+function addToCart(id, title, price) {
+  fetch("../../Backend/logic/addToCart.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id, title, price, quantity: 1 })
+  })
+    .then(res => res.json())
+    .then(data => alert(data.message || "Zum Warenkorb hinzugefügt!"))
+    .catch(err => alert("Fehler beim Hinzufügen."));
+}
+</script>
+
   <script src="../js/script.js"></script>
 </body>
 </html>
