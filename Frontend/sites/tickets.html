@@ -41,15 +41,31 @@
   Nur verfügbare anzeigen
 </label>
 
-<button onclick="loadTickets()">Filtern</button>
+<!--<button onclick="loadTickets()">Filtern</button>-->
 
 <!-- Bereich für Ticket-Anzeige -->
 <div id="ticket-list"></div>
 
   
-  
+  <script src="../js/script.js"></script>
   <script>
+    function debounce(func, delay) {
+  let timer;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(() => func.apply(this, arguments), delay);
+  };
+}
+
 document.addEventListener("DOMContentLoaded", loadTickets);
+
+document.getElementById("category").addEventListener("change", loadTickets);
+document.getElementById("search").addEventListener("input", debounce(loadTickets, 300));
+document.getElementById("priceMin").addEventListener("input", debounce(loadTickets, 300));
+document.getElementById("priceMax").addEventListener("input", debounce(loadTickets, 300));
+document.getElementById("rating").addEventListener("change", loadTickets);
+document.getElementById("onlyAvailable").addEventListener("change", loadTickets);
+
 
 function loadTickets() {
   const category = document.getElementById("category").value;
@@ -113,11 +129,17 @@ function addToCart(id, title, price) {
     body: JSON.stringify({ id, title, price, quantity: 1 })
   })
     .then(res => res.json())
-    .then(data => alert(data.message || "Zum Warenkorb hinzugefügt!"))
+    .then(data => {
+      alert(data.message || "Zum Warenkorb hinzugefügt!");
+      if (typeof updateCartCount === "function") {
+        updateCartCount();
+      }
+    })
     .catch(err => alert("Fehler beim Hinzufügen."));
 }
+
 </script>
 
-  <script src="../js/script.js"></script>
+  
 </body>
 </html>

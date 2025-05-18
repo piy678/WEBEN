@@ -75,7 +75,26 @@ function removeFromCart(id) {
       console.error("Fehler beim Entfernen des Produkts:", error);
     });
 }
+  function updateCartCount() {
+    fetch("../../Backend/logic/getCartItems.php")
+      .then(res => res.json())
+      .then(data => {
+        let total = 0;
+        data.forEach(item => total += item.quantity);
+        const badge = document.getElementById("cart-count");
+        if (badge) {
+          badge.textContent = total;
+        }
+      })
+      .catch(err => console.error("Fehler beim Laden des Warenkorb-Zählers:", err));
+  }
+
+  document.addEventListener("DOMContentLoaded", updateCartCount);
 
 function goToCheckout() {
   alert("Zur Kasse geht's hier weiter...");
 }
+function goToCheckout() {
+  window.location.href = "checkout.html";
+}
+

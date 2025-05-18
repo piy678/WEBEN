@@ -29,13 +29,25 @@ $is_admin = $_SESSION['is_admin'] ?? false;
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <?php if (!$is_logged_in): ?>
-                        <li class="nav-item"><a class="nav-link" href="../sites/login.html">Login</a></li>
-                        <li class="nav-item"><a class="nav-link" href="../sites/registration.html">Registrierung</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../sites/tickets.html">Tickets</a></li>
+                        <li class="nav-item">
+  <a class="nav-link" href="../sites/cart.html">
+    🛒<span id="cart-count" class="badge bg-light text-dark">0</span>
+  </a>
+</li>
+
                     <?php else: ?>
                         <?php if ($is_admin): ?>
-                            <li class="nav-item"><a class="nav-link" href="../sites/products_admin.php">Adminbereich</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../sites/products_admin.php">Produkte bearbeiten</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../sites/admin_userliste.php">Kunden bearbeiten</a></li>
                         <?php else: ?>
-                            <li class="nav-item"><a class="nav-link" href="../sites/cart.html">Warenkorb</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../sites/tickets.html">Tickets</a></li>
+                            <li class="nav-item">
+  <a class="nav-link" href="../sites/cart.html">
+    🛒<span id="cart-count" class="badge bg-light text-dark">0</span>
+  </a>
+</li>
+                            <li class="nav-item"><a class="nav-link" href="../sites/myorders.html">Mein Konto</a></li>
                         <?php endif; ?>
                         <li class="nav-item"><a class="nav-link" href="../../Backend/logic/logout.php">Logout</a></li>
                     <?php endif; ?>
