@@ -1,64 +1,44 @@
 <?php
 session_start();
-require_once '../config/db.php'; 
+require_once '../config/db.php';
 
-$identifier = $_POST['login'] ?? ''; 
+$identifier = $_POST['login'] ?? '';
 $password = $_POST['password'] ?? '';
-$remember = isset($_POST['remember']); 
 
 if (!$identifier || !$password) {
-    header("Location: ../../Frontend/sites/login.html?error=empty");
+    header("Location: ../../Frontend/sites/login.html?error=invalid");
     exit;
 }
 
-// Verbindung zur Datenbank
 $conn = new mysqli($host, $user, $pass, $dbname);
-
-// Verbindung prüfen
 if ($conn->connect_error) {
     die("Verbindungsfehler: " . $conn->connect_error);
 }
 
-// Statement vorbereiten: hole auch is_active
-$stmt = $conn->prepare("SELECT id, benutzername, email, passwort, is_admin, is_active FROM benutzer WHERE benutzername = ? OR email = ?");
+$stmt = $conn->prepare("SELECT id, benutzername, passwort, is_admin, is_active FROM benutzer WHERE benutzername = ? OR email = ?");
 $stmt->bind_param("ss", $identifier, $identifier);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($user = $result->fetch_assoc()) {
-
-    // Prüfen ob deaktiviert
     if ($user["is_active"] == 0) {
-        header("Location: ../../Frontend/sites/login.html?error=deactivated");
+        header("Location: ../../Frontend/sites/login.php?error=deactivated");
         exit;
     }
 
     if (password_verify($password, $user['passwort'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['benutzername'];
-        $_SESSION['username'] = $user['benutzername'];
-        //$_SESSION['role'] = $user['is_admin'] ? "admin" : "user";
-        $_SESSION['is_admin'] = $user['is_admin']; 
+        $_SESSION['is_admin'] = $user['is_admin'];
 
-        if ($remember) {
-            setcookie('remember_me', $user['id'], time() + (86400 * 30), "/");
+        if ($user['is_admin']) {
+            header("Location: ../../Frontend/sites/products_admin.php");
+        } else {
+            header("Location: ../../Frontend/sites/tickets.html");
         }
-
-         if ($user['is_admin']) {
-        header("Location: ../../Frontend/sites/products_admin.php");
-    } else {
-        header("Location: ../../Frontend/sites/tickets.html");
-    }
-    exit;
-    } else {
-        header("Location: ../../Frontend/sites/login.html?error=invalid");
         exit;
     }
-} else {
-    header("Location: ../../Frontend/sites/login.html?error=invalid");
-    exit;
 }
 
-$stmt->close();
-$conn->close();
-?>
+header("Location: ../../Frontend/sites/login.html?error=invalid");
+exit;
