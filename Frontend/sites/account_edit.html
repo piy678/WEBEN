@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Stammdaten bearbeiten</title>
+  <link rel="stylesheet" href="../res/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Meine Daten bearbeiten</h2>
+    <form id="editForm">
+      <label>Vorname: <input type="text" name="vorname" required></label><br>
+      <label>Nachname: <input type="text" name="nachname" required></label><br>
+      <label>Adresse: <input type="text" name="adresse" required></label><br>
+      <label>PLZ: <input type="text" name="plz" required></label><br>
+      <label>Ort: <input type="text" name="ort" required></label><br>
+      <label>E-Mail: <input type="email" name="email" required></label><br>
+
+      <label>Zahlungsmethode:
+        <select name="zahlungsmethode" required>
+          <option value="">-- auswählen --</option>
+          <option value="PayPal">PayPal</option>
+          <option value="Kreditkarte">Kreditkarte</option>
+          <option value="Rechnung">Rechnung</option>
+        </select>
+      </label><br><br>
+
+      <label>🔒 Passwort zur Bestätigung:
+        <input type="password" name="passwort" required>
+      </label><br><br>
+
+      <button type="submit">Speichern</button>
+    </form>
+    <p id="msg"></p>
+  </div>
+
+  <script src="../js/account_edit.js"></script>
+  <script src="../js/script.js"></script>
+</body>
+</html>

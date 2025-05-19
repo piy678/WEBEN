@@ -24,31 +24,61 @@ $orders = $stmt->get_result();
 <body class="container mt-4">
   <h2>Bestellungen von Nutzer #<?= $user_id ?></h2>
   <a href="admin_userliste.php" class="btn btn-secondary mb-3">Zurück</a>
+<?php while ($order = $orders->fetch_assoc()): ?>
+  <div class="card mb-3 p-3">
+    <strong>Bestellung #<?= $order['id'] ?></strong><br>
+    Datum: <?= $order['created_at'] ?> – Gesamt: <?= $order['total_price'] ?> €<br>
+    <button class="btn btn-sm btn-outline-primary" onclick="loadOrderItems(<?= $order['id'] ?>)">Details</button>
 
-  <?php while ($order = $orders->fetch_assoc()): ?>
-    <div class="card mb-3 p-3">
-      <strong>Bestellung #<?= $order['id'] ?></strong><br>
-      Datum: <?= $order['created_at'] ?> – Gesamt: <?= $order['total_price'] ?> €<br>
-      <button class="btn btn-sm btn-outline-primary" onclick="loadOrderItems(<?= $order['id'] ?>)">Details</button>
-      <div id="items-<?= $order['id'] ?>"></div>
-    </div>
-  <?php endwhile; ?>
+    <div id="items-<?= $order['id'] ?>" class="ms-3 mt-2"></div>
+  </div>
+<?php endwhile; ?>
 
-  <script>
-    function loadOrderItems(orderId) {
-      fetch(`../../Backend/logic/getOrderItems.php?order_id=${orderId}`)
-        .then(res => res.json())
-        .then(items => {
-          const container = document.getElementById("items-" + orderId);
-          if (items.length === 0) {
-            container.innerHTML = "<em>Keine Positionen</em>";
-            return;
-          }
-          container.innerHTML = "<ul>" + items.map(i =>
-            `<li>${i.title} × ${i.quantity} = ${i.price} €</li>`
-          ).join('') + "</ul>";
-        });
-    }
-  </script>
+
+<script>
+function loadOrderItems(orderId) {
+  fetch(`../../Backend/logic/getOrderItemsAdmin.php?order_id=${orderId}`)
+    .then(res => res.json())
+    .then(items => {
+      const container = document.getElementById("items-" + orderId);
+      if (!items || items.length === 0) {
+        container.innerHTML = "<em>Keine Positionen gefunden</em>";
+        return;
+      }
+
+     let html = "<ul>";
+items.forEach(item => {
+  html += `
+    <li>
+      ${item.title} × ${item.quantity} = ${item.price} €
+      <button class="btn btn-sm btn-danger ms-2" onclick="deleteOrderItem(${item.id}, ${orderId})">Entfernen</button>
+    </li>
+  `;
+});
+html += "</ul>";
+      container.innerHTML = html;
+    });
+}
+function deleteOrderItem(itemId, orderId) {
+  if (!itemId || itemId === undefined) {
+    alert("Fehler: Keine gültige item_id übergeben.");
+    return;
+  }
+
+  fetch(`../../Backend/logic/deleteOrderItem.php?item_id=${itemId}`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        loadOrderItems(orderId);
+      } else {
+        alert("Löschen fehlgeschlagen.");
+      }
+    })
+    .catch(() => alert("Fehler beim Löschen."));
+}
+
+
+</script>
+<script src="../js/script.js"></script>
 </body>
 </html>

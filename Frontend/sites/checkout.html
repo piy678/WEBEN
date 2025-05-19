@@ -17,6 +17,13 @@
   <button onclick="applyVoucher()">Gutschein anwenden</button>
 
   <h3>Gesamtpreis: <span id="total-price">0 €</span></h3>
+<h3>Zahlungsart wählen:</h3>
+<select id="payment-method" required>
+  <option value="">-- Bitte wählen --</option>
+  <option value="paypal">PayPal</option>
+  <option value="kreditkarte">Kreditkarte</option>
+  <option value="bar">Barzahlung</option>
+</select>
 
   <button onclick="submitOrder()">Jetzt Bestellen</button>
 

@@ -4,6 +4,7 @@ require_once '../config/db.php';
 
 $identifier = $_POST['login'] ?? '';
 $password = $_POST['password'] ?? '';
+$remember = isset($_POST['remember']);
 
 if (!$identifier || !$password) {
     header("Location: ../../Frontend/sites/login.html?error=invalid");
@@ -25,6 +26,18 @@ if ($user = $result->fetch_assoc()) {
         header("Location: ../../Frontend/sites/login.php?error=deactivated");
         exit;
     }
+     // Login merken – Token erzeugen und Cookie setzen
+        if ($remember) {
+            $token = bin2hex(random_bytes(32)); // sicheres Token
+
+            // Token in die Datenbank speichern
+            $insertToken = $conn->prepare("INSERT INTO login_tokens (user_id, token) VALUES (?, ?)");
+            $insertToken->bind_param("is", $user['id'], $token);
+            $insertToken->execute();
+
+            // Cookie setzen (30 Tage gültig)
+            setcookie("rememberme", $token, time() + (86400 * 30), "/", "", false, true);
+        }
 
     if (password_verify($password, $user['passwort'])) {
         $_SESSION['user_id'] = $user['id'];
