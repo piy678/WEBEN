@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //alle Produkte im Warenkorb zurückgeben, Produkte aus dem Backend laden und anzeigen
 function loadCart() {
-  fetch("../../backend/logic/getCartItems.php")
+  fetch("../../../Backend/logic/getCartItems.php")
   .then(res => res.text())
   .then(txt => {
     console.log("Antwort vom Server:", txt);  // was PHP zurückgibt
@@ -76,7 +76,7 @@ function removeFromCart(id) {
     });
 }
   function updateCartCount() {
-    fetch("../../Backend/logic/getCartItems.php")
+    fetch("../../../Backend/logic/getCartItems.php")
       .then(res => res.json())
       .then(data => {
         let total = 0;

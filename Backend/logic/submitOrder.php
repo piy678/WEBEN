@@ -7,40 +7,64 @@ if (!isset($_SESSION["cart"]) || empty($_SESSION["cart"])) {
     exit;
 }
 
-// Bestellung speichern
-$userId = $_SESSION["user_id"] ?? null;
+if (!isset($_SESSION['user_id'])) {
+    echo json_encode([
+        "success" => false,
+        "message" => "Sie müssen eingeloggt sein, um eine Bestellung abzuschließen."
+    ]);
+    exit;
+}
+
+$data = json_decode(file_get_contents("php://input"), true);
+$paymentMethod = $data['payment'] ?? '';
+
+if (!$paymentMethod) {
+    echo json_encode(["success" => false, "message" => "Zahlungsart fehlt."]);
+    exit;
+}
+
+$userId = $_SESSION["user_id"];
 $total = 0;
+
+// Gesamtpreis berechnen
 foreach ($_SESSION["cart"] as $item) {
     $total += $item["price"] * $item["quantity"];
 }
 
-// Gutschein anwenden (falls vorhanden)
+// Gutschein anwenden
 if (isset($_SESSION["voucher"])) {
     $total -= $_SESSION["voucher"]["value"];
     if ($total < 0) $total = 0;
 }
 
-// Bestellung in DB speichern
-mysqli_query($mysqli, "INSERT INTO orders (user_id, total_price, created_at) VALUES ($userId, $total, NOW())");
-$orderId = mysqli_insert_id($mysqli);
+$totalPrice = $total;
 
-// Bestellpositionen speichern
+// Bestellung speichern
+$stmt = $mysqli->prepare("INSERT INTO orders (user_id, total_price, payment_method, created_at) VALUES (?, ?, ?, NOW())");
+$stmt->bind_param("ids", $userId, $totalPrice, $paymentMethod);
+$stmt->execute();
+$orderId = $stmt->insert_id;
+
+// Bestellpositionen speichern (sicher!)
+$itemStmt = $mysqli->prepare("INSERT INTO order_items (order_id, product_id, title, price, quantity) VALUES (?, ?, ?, ?, ?)");
+
 foreach ($_SESSION["cart"] as $item) {
     $pid = $item["id"];
     $title = $item["title"];
     $price = $item["price"];
     $quantity = $item["quantity"];
 
-    mysqli_query($mysqli, "INSERT INTO order_items (order_id, product_id, title, price, quantity) VALUES ($orderId, $pid, '$title', $price, $quantity)");
+    $itemStmt->bind_param("iisdi", $orderId, $pid, $title, $price, $quantity);
+    $itemStmt->execute();
 }
 
 // Gutschein als verwendet markieren
 if (isset($_SESSION["voucher"])) {
     $voucherId = $_SESSION["voucher"]["id"];
-    mysqli_query($mysqli, "UPDATE vouchers SET used = 1 WHERE id = $voucherId");
+    $mysqli->query("UPDATE vouchers SET used = 1 WHERE id = $voucherId");
 }
 
-// Warenkorb leeren
+// Session leeren
 unset($_SESSION["cart"]);
 unset($_SESSION["voucher"]);
 

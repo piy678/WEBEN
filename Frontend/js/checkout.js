@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", loadCartSummary);
 
 function loadCartSummary() {
@@ -44,14 +45,26 @@ function applyVoucher() {
 
 
 function submitOrder() {
-  fetch("../../Backend/logic/submitOrder.php", { method: "POST" })
+  const paymentMethod = document.getElementById("payment-method").value;
+
+  if (!paymentMethod) {
+    alert("Bitte wählen Sie eine Zahlungsart.");
+    return;
+  }
+
+  fetch("../../Backend/logic/submitOrder.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ payment: paymentMethod })
+  })
     .then(res => res.json())
     .then(data => {
       if (data.success) {
         alert("Bestellung erfolgreich!");
-        window.location.href = "myorders.html"; // Weiterleitung zur Bestellübersicht
+        window.location.href = "myorders.html";
       } else {
         alert(data.message);
       }
     });
 }
+

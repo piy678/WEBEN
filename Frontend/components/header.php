@@ -1,4 +1,7 @@
 <?php
+require_once '../../Backend/config/db.php';
+require_once '../../Backend/logic/session_check.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -31,9 +34,12 @@ $is_admin = $_SESSION['is_admin'] ?? false;
                     <?php if (!$is_logged_in): ?>
                         <li class="nav-item"><a class="nav-link" href="../sites/tickets.html">Tickets</a></li>
                         <li class="nav-item">
-  <a class="nav-link" href="../sites/cart.html">
-    🛒<span id="cart-count" class="badge bg-light text-dark">0</span>
-  </a>
+<a href="../sites/cart.html" class="nav-link position-relative">
+  🛒
+  <span id="cart-count" class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">0</span>
+</a>
+
+
 </li>
 
                     <?php else: ?>
@@ -43,11 +49,23 @@ $is_admin = $_SESSION['is_admin'] ?? false;
                         <?php else: ?>
                             <li class="nav-item"><a class="nav-link" href="../sites/tickets.html">Tickets</a></li>
                             <li class="nav-item">
-  <a class="nav-link" href="../sites/cart.html">
-    🛒<span id="cart-count" class="badge bg-light text-dark">0</span>
-  </a>
+ <a href="../sites/cart.html" class="nav-link position-relative">
+  🛒
+  <span id="cart-count" class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill">0</span>
+</a>
+
+
 </li>
-                            <li class="nav-item"><a class="nav-link" href="../sites/myorders.html">Mein Konto</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../sites/myorders.html">Mein Bestellungen</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../sites/account.html">Mein Konto</a></li>
+                            <li class="nav-item">
+  <?php if (isset($_SESSION['username'])): ?>
+    <span class="nav-link">Eingeloggt als: <strong><?= htmlspecialchars($_SESSION['username']) ?></strong></span>
+  <?php else: ?>
+    <a class="nav-link" href="login.html">Login</a>
+  <?php endif; ?>
+</li>
+
                         <?php endif; ?>
                         <li class="nav-item"><a class="nav-link" href="../../Backend/logic/logout.php">Logout</a></li>
                     <?php endif; ?>
