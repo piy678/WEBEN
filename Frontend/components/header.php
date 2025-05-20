@@ -65,6 +65,7 @@ $username = $_SESSION['username'] ?? 'Benutzer';
               <?php if ($is_admin): ?>
                 <li><a class="dropdown-item" href="../sites/products_admin.php">Produkte bearbeiten</a></li>
                 <li><a class="dropdown-item" href="../sites/admin_userliste.php">Kunden bearbeiten</a></li>
+                <li><a class="dropdown-item" href="../sites/vouchers.html">Gutscheine bearbeiten</a></li>
               <?php else: ?>
                 <li><a class="dropdown-item" href="../sites/myorders.html">Meine Bestellungen</a></li>
                 <li><a class="dropdown-item" href="../sites/account.html">Mein Konto</a></li>
