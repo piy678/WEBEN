@@ -1,14 +1,9 @@
 <?php
-// Verbindung zur Datenbank
-$conn = new mysqli("localhost", "root", "", "webshop");
-
-// Fehlerprüfung
-if ($conn->connect_error) {
-    die("Verbindung fehlgeschlagen: " . $conn->connect_error);
+// Optional: Session-Check für Admin
+session_start();
+if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
+    die("Zugriff verweigert");
 }
-
-// Alle Benutzer abrufen
-$result = $conn->query("SELECT * FROM benutzer");
 ?>
 
 <!DOCTYPE html>
@@ -20,43 +15,26 @@ $result = $conn->query("SELECT * FROM benutzer");
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../res/css/style.css">
 </head>
-<body>
-    <h2>Kundenkonten verwalten (Admin)</h2>
+<body class="container mt-4">
+  <h2>Kunden verwalten</h2>
 
-    <table border="1" cellpadding="5" cellspacing="0">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>E-Mail</th>
-            <th>Status</th>
-            <th>Aktion</th>
-        </tr>
-
-        <?php while ($row = $result->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= htmlspecialchars($row['vorname'] . " " . $row['nachname']) ?></td>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= $row['is_active'] ? "Aktiv" : "Deaktiviert" ?></td>
-                 <td>
-    <a href="admin_bestellungen.php?user_id=<?= $row['id'] ?>" class="btn btn-info btn-sm mt-1">Bestellungen</a>
-  </td>
-                <td>
-                    <?php if ($row["is_active"]): ?>
-                        <form method="POST" action="../../Backend/logic/deaktivieren.php" style="display:inline;">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            <button type="submit">Deaktivieren</button>
-                        </form>
-                    <?php else: ?>
-                        <form method="POST" action="../../Backend/logic/aktivieren.php" style="display:inline;">
-                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
-                            <button type="submit">Aktivieren</button>
-                        </form>
-                    <?php endif; ?>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
+  <table class="table table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>Status</th>
+        <th>Aktion</th>
+      </tr>
+    </thead>
+    <tbody id="user-table">
+      <!-- JavaScript füllt das dynamisch -->
+    </tbody>
+  </table>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../js/userAdmin.js"></script>
 </body>
 </html>

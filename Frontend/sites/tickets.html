@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tickets durchsuchen</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
 <body>
@@ -41,105 +42,16 @@
   Nur verfügbare anzeigen
 </label>
 
-<!--<button onclick="loadTickets()">Filtern</button>-->
+<button onclick="loadTickets()">Filtern</button>
 
 <!-- Bereich für Ticket-Anzeige -->
 <div id="ticket-list"></div>
 
   
   <script src="../js/script.js"></script>
-  <script>
-    function debounce(func, delay) {
-  let timer;
-  return function () {
-    clearTimeout(timer);
-    timer = setTimeout(() => func.apply(this, arguments), delay);
-  };
-}
-
-document.addEventListener("DOMContentLoaded", loadTickets);
-
-document.getElementById("category").addEventListener("change", loadTickets);
-document.getElementById("search").addEventListener("input", debounce(loadTickets, 300));
-document.getElementById("priceMin").addEventListener("input", debounce(loadTickets, 300));
-document.getElementById("priceMax").addEventListener("input", debounce(loadTickets, 300));
-document.getElementById("rating").addEventListener("change", loadTickets);
-document.getElementById("onlyAvailable").addEventListener("change", loadTickets);
-
-
-function loadTickets() {
-  const category = document.getElementById("category").value;
-  const search = document.getElementById("search").value;
-  const minPrice = document.getElementById("priceMin").value;
-  const maxPrice = document.getElementById("priceMax").value;
-  const rating = document.getElementById("rating").value;
-  const available = document.getElementById("onlyAvailable").checked ? 1 : 0;
-
-  const params = new URLSearchParams({
-    category,
-    search,
-    minPrice,
-    maxPrice,
-    rating,
-    available
-  });
-
-  const url = "../../Backend/logic/getTickets.php?" + params.toString();
-  console.log("→ Anfrage an:", url); 
-
-  fetch(url)
-    .then(res => res.json())
-    .then(data => updateTicketList(data))
-    .catch(err => {
-      console.error("Fehler beim JSON-Parsing oder Laden:", err);
-    });
-}
-
-
-function updateTicketList(data) {
-  const container = document.getElementById("ticket-list");
-  container.innerHTML = "";
-
-  if (data.length === 0) {
-    container.innerHTML = "<p>Keine Tickets gefunden.</p>";
-    return;
-  }
-
-  data.forEach(ticket => {
-    const div = document.createElement("div");
-    const imagePath = ticket.image && ticket.image.trim() !== ""
-      ? `../../Backend/productpictures/${ticket.image}`
-      : "../res/img/placeholder.jpg";
-
-    div.innerHTML = `
-      <img src="${imagePath}" width="120" />
-      <p><strong>${ticket.title}</strong></p>
-      <p>${ticket.price} € – ${ticket.rating}★</p>
-      <button onclick="addToCart(${ticket.id}, '${ticket.title}', ${ticket.price})">In den Warenkorb</button>
-    `;
-
-    container.appendChild(div);
-  });
-}
-
-function addToCart(id, title, price) {
-  fetch("../../Backend/logic/addToCart.php", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ id, title, price, quantity: 1 })
-  })
-    .then(res => res.json())
-    .then(data => {
-      alert(data.message || "Zum Warenkorb hinzugefügt!");
-      if (typeof updateCartCount === "function") {
-        updateCartCount();
-      }
-    })
-    .catch(err => alert("Fehler beim Hinzufügen."));
-}
-
-</script>
-
   
+  <script src="../js/tickets.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
 </html>
