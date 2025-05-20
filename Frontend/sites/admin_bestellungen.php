@@ -16,7 +16,7 @@
   </style>
   </head>
 <body class="d-flex flex-column min-vh-100">
-    <h2></h2><strong>Bestellungen</strong></h2>
+    <h2><strong>Bestellungen</strong></h2>
   <a href="../sites/admin_userliste.php" class="btn btn-secondary mb-3">Zurück</a>
    <main class="container my-4 flex-grow-1">
   
