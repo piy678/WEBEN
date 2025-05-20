@@ -2,7 +2,7 @@ document.getElementById("editForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const formData = new FormData(e.target);
 
-  fetch("../../backend/logic/updateUser.php", {
+  fetch("../../Backend/logic/updateUser.php", {
     method: "POST",
     body: formData
   })

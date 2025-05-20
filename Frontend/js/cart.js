@@ -47,7 +47,7 @@ function updateQuantity(id, quantity) {
     return;
   }
 // Menge aktualisieren
-  fetch("../../backend/logic/cartFunctions.php?action=updateQuantity", {
+  fetch("../../Backend/logic/cartFunctions.php?action=updateQuantity", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: id, quantity: quantity })
@@ -62,7 +62,7 @@ function updateQuantity(id, quantity) {
 }
 // Produkt aus dem Warenkorb entfernen
 function removeFromCart(id) {
-  fetch("../../backend/logic/cartFunctions.php?action=removeFromCart", {
+  fetch("../../Backend/logic/cartFunctions.php?action=removeFromCart", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: id })
