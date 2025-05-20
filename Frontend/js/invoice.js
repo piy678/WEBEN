@@ -21,6 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
       let html = `
         <h2>Rechnung Nr. ${rechnungsnummer}</h2>
         <p><strong>Datum:</strong> ${datum}</p>
+        <div class="mb-4">
+  <h5><strong>Absender:</strong></h5>
+  <p>
+    SmartTicketing GmbH<br>
+    Tel: +43 123 456789<br>
+    E-Mail: info@smartticketing.at
+  </p>
+</div>
+
         <p><strong>Rechnung an:</strong><br>
         ${anschrift.vorname} ${anschrift.nachname}<br>
         ${anschrift.adresse}<br>
