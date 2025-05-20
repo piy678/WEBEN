@@ -61,14 +61,20 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("pdf-download").addEventListener("click", () => {
   const element = document.getElementById("invoice-data");
 
-  const options = {
-    margin: 0.5,
-    filename: `rechnung-${Date.now()}.pdf`,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+  const opt = {
+    margin:       [0.5, 0.5, 0.5, 0.5], // top, left, bottom, right
+    filename:     `rechnung-${Date.now()}.pdf`,
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0 // <- wichtig für volle Höhe
+    },
+    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+    pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] } // automatische Umbrüche
   };
 
-  html2pdf().set(options).from(element).save();
+  html2pdf().set(opt).from(element).save();
 });
+
 
