@@ -57,3 +57,18 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("invoice-data").innerHTML = html;
     });
 });
+
+document.getElementById("pdf-download").addEventListener("click", () => {
+  const element = document.getElementById("invoice-data");
+
+  const options = {
+    margin: 0.5,
+    filename: `rechnung-${Date.now()}.pdf`,
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: "in", format: "a4", orientation: "portrait" }
+  };
+
+  html2pdf().set(options).from(element).save();
+});
+

@@ -1,8 +1,5 @@
 <?php
 require_once '../config/db.php';
-require_once '../vendor/autoload.php'; // falls du Composer nutzt
-
-use Dompdf\Dompdf;
 
 session_start();
 
@@ -49,10 +46,3 @@ $html .= "<tr><td colspan='2'><strong>Gesamt</strong></td><td><strong>" . number
 $html .= "</table>";
 
 // PDF generieren
-$dompdf = new Dompdf();
-$dompdf->loadHtml($html);
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-
-// Datei anzeigen
-$dompdf->stream("Rechnung_$orderId.pdf", ["Attachment" => false]);
