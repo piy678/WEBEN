@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../res/css/style.css" />
 </head>
 <body>
+   <div class="page-wrapper">
+    <main class="content container py-4 d-flex flex-column justify-content-between">
   <h2>Checkout</h2>
 
   <div id="cart-summary">
@@ -17,9 +19,10 @@
 
   <label for="voucher">Gutscheincode:</label>
   <input type="text" id="voucher" placeholder="Gutschein eingeben">
-  <button onclick="applyVoucher()">Gutschein anwenden</button>
-
-  <h3>Gesamtpreis: <span id="total-price">0 €</span></h3>
+  <button onclick="applyVoucher()" class="btn btn-primary btn-sm">Gutschein anwenden</button>
+ 
+  <h3>Gesamtpreis: <span id="total-price">0 €</span></h3> 
+  <div class="cart-summary mt-4 d-flex justify-content-between align-items-center flex-wrap">
 <h3>Zahlungsart wählen:</h3>
 <select id="payment-method" required>
   <option value="">-- Bitte wählen --</option>
@@ -27,8 +30,11 @@
   <option value="kreditkarte">Kreditkarte</option>
   <option value="bar">Barzahlung</option>
 </select>
+  </div> 
+  <button onclick="submitOrder()" class="btn btn-success btn-sm mt-3 px-4">Jetzt Bestellen</button>
+  </main>
 
-  <button onclick="submitOrder()">Jetzt Bestellen</button>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="../js/checkout.js"></script>

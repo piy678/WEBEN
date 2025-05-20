@@ -14,10 +14,19 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     <title>Kundenverwaltung</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../res/css/style.css">
-</head>
-<body class="container-fluid mt-4">
-  <h2>Kunden verwalten</h2>
+      <style>
+    body {
+      margin: 0;
+    }
+    main {
+      flex-grow: 1;
+    }
+  
+  </style>
+<body class="d-flex flex-column min-vh-100">
+    <h1>Kundenverwaltung</h1>
 
+  <main class="container my-4"></main>
   <table class="table table-bordered">
     <thead class="table-dark">
       <tr>

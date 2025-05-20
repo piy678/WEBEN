@@ -13,8 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   <td>${user.email}</td>
   <td>${user.is_active == 1 ? "Aktiv" : "Deaktiviert"}</td>
   <td class="d-flex gap-2">
-    <a href="admin_bestellungen.php?user_id=${user.id}" class="btn btn-info btn-sm">Bestellungen</a>
-    <form method="POST" action="../backend/logic/${user.is_active == 1 ? 'deaktivieren' : 'aktivieren'}.php">
+    <a href="../sites/admin_bestellungen.php?user_id=${user.id}" class="btn btn-info btn-sm">Bestellungen</a>
+    <form method="POST" action="../../Backend/logic/${user.is_active == 1 ? 'deaktivieren' : 'aktivieren'}.php">
       <input type="hidden" name="id" value="${user.id}">
       <button type="submit" class="btn btn-sm btn-${user.is_active == 1 ? 'danger' : 'success'}">
         ${user.is_active == 1 ? 'Deaktivieren' : 'Aktivieren'}

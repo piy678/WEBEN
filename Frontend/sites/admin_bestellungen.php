@@ -6,13 +6,23 @@
       <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../res/css/style.css" />
-</head>
-<body class="container-fluid mt-4">
+<style>
+    body {
+      margin: 0;
+    }
+    main {
+      flex-grow: 1;
+    }
+  </style>
+  </head>
+<body class="d-flex flex-column min-vh-100">
+    <h2></h2><strong>Bestellungen</strong></h2>
+  <a href="../sites/admin_userliste.php" class="btn btn-secondary mb-3">Zurück</a>
+   <main class="container my-4 flex-grow-1">
+  
+<div id="order-container"></div>
+  </main>
 
-  <h2>Bestellungen</h2>
-  <a href="admin_userliste.php" class="btn btn-secondary mb-3">Zurück</a>
-
-  <div id="order-container"></div>
 
   <script>
     // Übergabe per URL: ?user_id=123
