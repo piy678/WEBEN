@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
 <style>
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+  }
+
   #print-btn {
     display: inline-block;
     padding: 6px 20px;
@@ -17,6 +23,7 @@
     margin: 0 auto;
   }
 </style>
+
 <body>
   <div class="page-wrapper">
     <main class="content container py-4 d-flex flex-column justify-content-between">
