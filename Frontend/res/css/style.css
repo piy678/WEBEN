@@ -163,23 +163,4 @@ form {
     padding: 20px;
 }
 
-@media print {
-  .no-print {
-    display: none !important;
-  }
-}
-@media print {
-  .no-print,
-  header,
-  footer,
-  nav {
-    display: none !important;
-  }
-}
 
-.small-btn {
-  width: auto;
-  padding: 6px 20px;
-  font-size: 0.9rem;
-  display: inline-block;
-}

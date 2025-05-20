@@ -3,7 +3,7 @@ function logout() {
       .then(res => res.json())
       .then(data => {
           if (data.success) {
-            window.location.href = "../Frontend\sites\index.html"; // 
+            window.location.href = "../Frontend\sites\index.php"; // 
           }
         })
         .catch(err => {

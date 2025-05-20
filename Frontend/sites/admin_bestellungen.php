@@ -7,8 +7,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="../res/css/style.css" />
 </head>
-<body class="container mt-4">
-<body class="container mt-4">
+<body class="container-fluid mt-4">
 
   <h2>Bestellungen</h2>
   <a href="admin_userliste.php" class="btn btn-secondary mb-3">Zurück</a>

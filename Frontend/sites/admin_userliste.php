@@ -15,7 +15,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../res/css/style.css">
 </head>
-<body class="container mt-4">
+<body class="container-fluid mt-4">
   <h2>Kunden verwalten</h2>
 
   <table class="table table-bordered">
