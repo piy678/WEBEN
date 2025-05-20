@@ -85,7 +85,7 @@ function loadTickets() {
   });
 
   const url = "../../Backend/logic/getTickets.php?" + params.toString();
-  console.log("→ Anfrage an:", url); // DEBUG
+  console.log("→ Anfrage an:", url); 
 
   fetch(url)
     .then(res => res.json())

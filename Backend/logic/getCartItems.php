@@ -1,12 +1,7 @@
 <?php
-
-error_reporting(0); // oder: error_reporting(E_ERROR);
-@session_start();
+error_reporting(0); // Warnungen unterdrücken
+session_start();
 header("Content-Type: application/json");
-echo json_encode($_SESSION['cart'] ?? []);
-
-
-
 
 // Session-Warenkorb prüfen
 $cart = $_SESSION["cart"] ?? [];
@@ -21,5 +16,6 @@ foreach ($cart as $item) {
     }
 }
 
-// Gültiges JSON ausgeben
+// Nur EINMAL ausgeben:
 echo json_encode($result);
+
