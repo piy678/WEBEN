@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Gutscheinverwaltung</title>
+  <link rel="stylesheet" href="../res/css/style.css">
+</head>
+<body>
+
+  <div id="header"></div>
+
+ <main class="container">
+  <form id="voucherForm">
+    <h2>Gutschein erstellen</h2>
+
+    <label for="voucher_value">Wert in €</label>
+    <input type="number" id="voucher_value" placeholder="z.B. 10">
+
+    <label for="voucher_valid_until">Gültig bis</label>
+    <input type="date" id="voucher_valid_until">
+
+    <button type="submit" id="createBtn">Erstellen</button>
+  </form>
+
+  <div style="margin-top: 40px;">
+    <h2>Alle Gutscheine</h2>
+    <div id="voucher_list"></div>
+  </div>
+</main>
+
+
+  <div id="footer"></div>
+
+  <script src="../js/voucherAdmin.js"></script>
+</body>
+</html>
