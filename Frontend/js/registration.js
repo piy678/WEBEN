@@ -21,19 +21,20 @@ document.getElementById("registerForm").addEventListener("submit", async functio
       zahlung: document.getElementById("zahlung").value
     };
   
-    fetch("../../Backend/logic/registration.php", {
-
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user)
-      })
-      .then(res => res.text()) // NICHT sofort .json()
-.then(txt => {
-  console.log("🔍 Antwort vom Server (raw):", txt); // <-- Wichtig!
+   fetch('../../Backend/logic/registration.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user)
 })
-.catch(err => {
-  console.error("Fehler bei der Registrierung:", err);
+.then(res => res.json())
+.then(data => {
+    if (data.success) {
+        window.location.href = '../sites/login.html';
+    } else {
+        alert(data.message);
+    }
 });
+
       
   });
   

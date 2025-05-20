@@ -58,7 +58,9 @@ $success = $stmt->execute();
 
 if ($success) {
     echo json_encode(["success" => true, "message" => "Registrierung erfolgreich"]);
+exit;
 } else {
     http_response_code(500); // Interner Serverfehler
     echo json_encode(["success" => false, "message" => "Fehler beim Einfügen: " . $stmt->error]);
 }
+
