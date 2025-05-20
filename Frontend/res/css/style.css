@@ -163,3 +163,22 @@ form {
     padding: 20px;
 }
 
+.card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.card-content h3 {
+  margin-top: 0;
+}
+
+.used {
+  color: red;
+}
+.active {
+  color: green;
+}
