@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 function updateCartCount() {
-  fetch("../backend/logic/getCartItems.php")
+  fetch("../../Backend/logic/getCartItems.php")
     .then(res => res.json())
     .then(data => {
       let total = 0;

@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", loadCartSummary);
 
 function loadCartSummary() {
-  fetch("../../backend/logic/getCartItems.php")
+  fetch("../../Backend/logic/getCartItems.php")
     .then(res => res.json())
     .then(cart => {
       const container = document.getElementById("cart-summary");
