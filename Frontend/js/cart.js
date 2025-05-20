@@ -25,13 +25,16 @@ function loadCart() {
         total += item.price * item.quantity;
 
         container.innerHTML += `
-          <div class="cart-item">
-            <strong>${item.title}</strong> - ${item.price} € x ${item.quantity}
-            <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
-            <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
-            <button onclick="removeFromCart(${item.id})">Löschen</button>
-          </div>
-        `;
+  <div class="cart-item">
+    <strong>${item.title}</strong> - ${item.price} € x ${item.quantity}
+    <div class="cart-buttons mt-2">
+      <button class="btn btn-sm btn-success me-1" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+      <button class="btn btn-sm btn-success me-1" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+      <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">Löschen</button>
+    </div>
+  </div>
+`;
+
       });
       // Gesamtpreis berechnen und anzeigen
       document.getElementById("total-price").textContent = total.toFixed(2) + " €";
