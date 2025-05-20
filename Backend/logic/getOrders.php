@@ -12,7 +12,7 @@ if (!$userId) {
 }
 
 // Alle Bestellungen dieses Benutzers holen
-$sql = "SELECT id, total_price, created_at FROM orders WHERE user_id = ? ORDER BY created_at DESC";
+$sql = "SELECT id, total_price, created_at FROM orders WHERE user_id = ? ORDER BY created_at ASC";
 
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("i", $userId);
