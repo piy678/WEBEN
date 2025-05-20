@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //alle Produkte im Warenkorb zurückgeben, Produkte aus dem Backend laden und anzeigen
 function loadCart() {
-  fetch("../../backend/logic/getCartItems.php")
+  fetch("../../Backend/logic/getCartItems.php")
   .then(res => res.text())
   .then(txt => {
     console.log("Antwort vom Server:", txt);  // was PHP zurückgibt
@@ -25,13 +25,16 @@ function loadCart() {
         total += item.price * item.quantity;
 
         container.innerHTML += `
-          <div class="cart-item">
-            <strong>${item.title}</strong> - ${item.price} € x ${item.quantity}
-            <button onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
-            <button onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
-            <button onclick="removeFromCart(${item.id})">Löschen</button>
-          </div>
-        `;
+  <div class="cart-item">
+    <strong>${item.title}</strong> - ${item.price} € x ${item.quantity}
+    <div class="cart-buttons mt-2">
+      <button class="btn btn-sm btn-success me-1" onclick="updateQuantity(${item.id}, ${item.quantity + 1})">+</button>
+      <button class="btn btn-sm btn-success me-1" onclick="updateQuantity(${item.id}, ${item.quantity - 1})">-</button>
+      <button class="btn btn-sm btn-danger" onclick="removeFromCart(${item.id})">Löschen</button>
+    </div>
+  </div>
+`;
+
       });
       // Gesamtpreis berechnen und anzeigen
       document.getElementById("total-price").textContent = total.toFixed(2) + " €";
@@ -47,7 +50,7 @@ function updateQuantity(id, quantity) {
     return;
   }
 // Menge aktualisieren
-  fetch("../../backend/logic/cartFunctions.php?action=updateQuantity", {
+  fetch("../../Backend/logic/cartFunctions.php?action=updateQuantity", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: id, quantity: quantity })
@@ -62,7 +65,7 @@ function updateQuantity(id, quantity) {
 }
 // Produkt aus dem Warenkorb entfernen
 function removeFromCart(id) {
-  fetch("../../backend/logic/cartFunctions.php?action=removeFromCart", {
+  fetch("../../Backend/logic/cartFunctions.php?action=removeFromCart", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: id })
@@ -75,7 +78,26 @@ function removeFromCart(id) {
       console.error("Fehler beim Entfernen des Produkts:", error);
     });
 }
+  function updateCartCount() {
+    fetch("../../Backend/logic/getCartItems.php")
+      .then(res => res.json())
+      .then(data => {
+        let total = 0;
+        data.forEach(item => total += item.quantity);
+        const badge = document.getElementById("cart-count");
+        if (badge) {
+          badge.textContent = total;
+        }
+      })
+      .catch(err => console.error("Fehler beim Laden des Warenkorb-Zählers:", err));
+  }
+
+  document.addEventListener("DOMContentLoaded", updateCartCount);
 
 function goToCheckout() {
   alert("Zur Kasse geht's hier weiter...");
 }
+function goToCheckout() {
+  window.location.href = "checkout.html";
+}
+

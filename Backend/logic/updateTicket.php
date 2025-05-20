@@ -1,21 +1,50 @@
 <?php
+header('Content-Type: application/json');
 require_once('../config/db.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+try {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception("Ungültige Anfrage.");
+    }
+
+    // Pflichtfelder prüfen
+    if (!isset($_POST['id'], $_POST['name'], $_POST['price'], $_POST['category'])) {
+        throw new Exception("Pflichtfelder fehlen.");
+    }
+
     $id = $_POST['id'];
-    $title = $_POST['title'];
+    $title = $_POST['name'];
     $category = $_POST['category'];
     $price = $_POST['price'];
+    $rating = $_POST['rating'] ?? 0;
+    $description = $_POST['description'] ?? '';
     $imageName = $_POST['currentImage'];
 
-    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    // Bild hochladen, wenn neu ausgewählt
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === 0) {
         $imageName = basename($_FILES['image']['name']);
         move_uploaded_file($_FILES['image']['tmp_name'], "../productpictures/" . $imageName);
     }
 
-    $stmt = $mysqli->prepare("UPDATE tickets SET title=?, category=?, price=?, image=? WHERE id=?");
-    $stmt->bind_param("ssdsi", $title, $category, $price, $imageName, $id);
+    // SQL vorbereiten
+    $stmt = $mysqli->prepare("UPDATE tickets SET title = ?, description = ?, category = ?, rating = ?, price = ?, image = ? WHERE id = ?");
+    if (!$stmt) {
+        throw new Exception("SQL-Fehler: " . $mysqli->error);
+    }
+
+    $stmt->bind_param("sssddsi", $title, $description, $category, $rating, $price, $imageName, $id);
     $stmt->execute();
 
-    echo json_encode(['status' => 'updated']);
+    if ($stmt->affected_rows > 0) {
+        echo json_encode(['status' => 'success', 'rows_updated' => $stmt->affected_rows]);
+    } else {
+        echo json_encode(['status' => 'warning', 'message' => 'Kein Datensatz geändert.']);
+    }
+
+    $stmt->close();
+} catch (Exception $e) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => $e->getMessage()
+    ]);
 }

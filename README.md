@@ -84,5 +84,3 @@ backend/
 - **Backend**: PHP (mit `mysqli`), objektorientiert
 - **Datenbank**: MySQL
 - **Struktur**: Trennung von Frontend & Backend gemäß Spezifikation
-
-  

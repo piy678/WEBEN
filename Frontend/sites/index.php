@@ -1,3 +1,7 @@
+<?php
+session_start();
+$username = $_SESSION['username'] ?? null;
+?>
 <!DOCTYPE html>
 <html lang="de">
   <head>
@@ -28,23 +32,24 @@
 </head>
 <body class="d-flex flex-column min-vh-100" style="color: black;">
 
-    
-    <main class="flex-grow-1" style="color: black;">
-     
-      <header class="bg-light py-5 text-center" style="color: black;">
-        <div class="container">
-          <h1 class="display-4">SmartTicketing</h1>
-          <p class="lead">
-            Finden Sie den passenden Event für Ihre Interessen
-          </p>
+  <main class="flex-grow-1" style="color: black;">
+    <header class="bg-light py-5 text-center" style="color: black;">
+      <div class="container">
+        <h1 class="display-4">SmartTicketing</h1>
+        <p class="lead">Finden Sie den passenden Event für Ihre Interessen</p>
+</p>
+        <?php if ($username): ?>
+          <h2 class="mt-4">Willkommen, <strong><?= htmlspecialchars($username) ?></strong>!</h2>
+          <a href="tickets.html" class="btn btn-success btn-lg mt-3">Zu den Tickets</a> <br>
+          <a href="../../Backend/logic/logout.php" class="btn btn-danger btn-lg mt-3">Abmelden</a>
+        <?php else: ?>
+          <p class="lead">Jetzt anmelden oder registrieren</p>
           <a href="registration.html" class="btn btn-primary btn-lg mt-3">Registrierung</a> <br>
-          <a href="login.html" class="btn btn-primary btn-lg mt-3">Login</a> <br>
-          <button onclick="logout()">Abmelden</button>
-
-        </div>
-
-      </header>
-    </main>
+          <a href="login.html" class="btn btn-primary btn-lg mt-3">Login</a>
+        <?php endif; ?>
+      </div>
+    </header>
+  </main>
     
     <!-- Bootstrap + Custom JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

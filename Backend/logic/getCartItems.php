@@ -1,4 +1,5 @@
 <?php
+error_reporting(0); // Warnungen unterdrücken
 session_start();
 header("Content-Type: application/json");
 
@@ -15,5 +16,6 @@ foreach ($cart as $item) {
     }
 }
 
-// Gültiges JSON ausgeben
+// Nur EINMAL ausgeben:
 echo json_encode($result);
+

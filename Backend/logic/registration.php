@@ -1,6 +1,5 @@
 <?php
 header('Content-Type: application/json');
-echo json_encode(["success" => true, "message" => "Test OK"]);
 ini_set('display_errors', 1); // Fehler sichtbar machen
 error_reporting(E_ALL);
 
@@ -16,6 +15,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 // Prüfen ob JSON korrekt empfangen wurde
 if (!$data) {
+    http_response_code(400); 
     echo json_encode(["success" => false, "message" => "Keine oder ungültige Daten empfangen"]);
     exit;
 }
@@ -35,6 +35,7 @@ $hash = password_hash($data['password'], PASSWORD_DEFAULT);
 // SQL vorbereiten
 $stmt = $mysqli->prepare("INSERT INTO benutzer (vorname, nachname, adresse, plz, ort, email, benutzername, passwort, zahlungsmethode) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 if (!$stmt) {
+    http_response_code(500); 
     echo json_encode(["success" => false, "message" => "SQL-Fehler: " . $mysqli->error]);
     exit;
 }
@@ -58,5 +59,6 @@ $success = $stmt->execute();
 if ($success) {
     echo json_encode(["success" => true, "message" => "Registrierung erfolgreich"]);
 } else {
+    http_response_code(500); // Interner Serverfehler
     echo json_encode(["success" => false, "message" => "Fehler beim Einfügen: " . $stmt->error]);
 }
