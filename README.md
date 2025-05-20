@@ -1,86 +1,145 @@
-# Webentwicklungsprojekt
-
-    
 # SmartTicketing – Webshop
 
 Ein Webshop für den Online-Verkauf von Veranstaltungstickets (Konzerte, Theater, etc.).  
-Nutzer*innen können sich registrieren, Tickets durchsuchen, in den Warenkorb legen und bestellen.
+Nutzer*innen können sich registrieren, Tickets durchsuchen, in den Warenkorb legen und bestellen.  
+Administratoren können Produkte verwalten und Bestellungen einsehen.
 
 ---
 
 ## Projektstruktur
 
-### Frontend (`/`)
- ``` 
+### Frontend (`/frontend/`)
+
+```
 frontend/
 │
-├── components
-│   ├──index.html               → Startseite
-├── /res
-│   ├── /css/
-│   │   └── style.css
-│   └── /img/
-│       └── picture1.jpg
+├── components/
+│   └── index.html                   → Startseite
 │
-├── /js/
-│   ├── login.js             → Login via AJAX
-│   ├── register.js          → Registrierung via AJAX
-│   ├── tickets.js           → Suche + Anzeige von Tickets
-│   └── cart.js              → Warenkorb-Logik
-│   ├── checkout.js              → Bestellung abschicken, Gutschein einlösen 
-│   ├── myorders.js              → Eigene Bestellungen anzeigen 
-│   └── invoice.js               → Rechnung laden/anzeigen
-│   └── **productAdmin.js**        ← NEU: Logik für Produktverwaltung (AJAX)
+├── res/
+│   ├── css/
+│   │   └── style.css               → Zentrales Styling
+│   └── img/
+│       └── picture1.jpg, ...       → Ticket/Event-Bilder
 │
-├── /sites/
-│   ├── login.html
-│   ├── register.html
-│   ├── tickets.html
-│   ├── cart.html
-│   └── account.html
-│   ├── checkout.html            → Checkout-Seite 
-│   ├── myorders.html            → Bestellhistorie anzeigen 
-│   └── invoice.html             → Einzelrechnung anzeigen
-│   └── **products_admin.html**    ← NEU: Admin-Seite für Produktpflege
- ``` 
-### Backend (`/`)
- ``` 
+├── js/
+│   ├── login.js                    → Login via AJAX
+│   ├── register.js                 → Registrierung via AJAX
+│   ├── tickets.js                  → Ticket-Suche und Anzeige
+│   ├── cart.js                     → Warenkorb-Logik
+│   ├── checkout.js                 → Bestellung abschicken, Gutschein einlösen
+│   ├── myorders.js                 → Eigene Bestellungen anzeigen
+│   ├── invoice.js                  → Rechnung laden und anzeigen
+│   └── productAdmin.js             → Produktverwaltung (Adminbereich)
+│
+├── sites/
+│   ├── login.html                  → Login-Seite
+│   ├── register.html               → Registrierung
+│   ├── tickets.html                → Ticketübersicht
+│   ├── cart.html                   → Warenkorb
+│   ├── checkout.html               → Kasse (Bestellung absenden)
+│   ├── myorders.html               → Bestellhistorie
+│   ├── invoice.html                → Einzelrechnung anzeigen
+│   └── products_admin.html         → Adminseite zur Produktpflege
+```
+
+---
+
+### Backend (`/backend/`)
+
+```
 backend/
 │
-├── /config/
-│   ├── dbacess.php          → MySQL-Verbindung
-│   └── dataHandler.php      → (optional)
+├── config/
+│   ├── dbacess.php                 → MySQL-Verbindung
+│   └── dataHandler.php            → (optional)
 │
-├── /models/
-│   ├── user.class.php       → Darstellen eines Users als Objekt
-│   ├── product.class.php    → Event-Datenmodell
-│   └── cart.class.php       → Warenkorb-Klasse
-│   ├── order.class.php          → Bestellung-Objekt 
-│   ├── voucher.class.php        → Gutschein-Objekt 
-│   └── invoice.class.php        → Rechnungs-Objekt 
+├── models/
+│   ├── user.class.php             → Benutzerobjekt
+│   ├── product.class.php          → Ticket/Event-Datenmodell
+│   ├── cart.class.php             → Warenkorb-Klasse
+│   ├── order.class.php            → Bestellung-Objekt
+│   ├── voucher.class.php          → Gutschein-Objekt
+│   └── invoice.class.php          → Rechnungs-Objekt
 │
-├── /logic/
-│   ├── login.php            → verarbeitet Login (POST)
-│   ├── register.php         → verarbeitet Registrierung (POST)
-│   ├── searchTickets.php    → liefert Tickets als JSON (GET)
-│   ├── addToCart.php        → AJAX-Warenkorb hinzufügen
-│   └── getCartItems.php     → gibt Warenkorb-Daten als JSON zurück
-│   ├── submitOrder.php          → Bestellung speichern (Session → DB) 
-│   ├── getOrders.php            → Bestellungen eines Users abrufen 
-│   ├── useVoucher.php           → Gutscheincode prüfen und anwenden 
-│   └── generateInvoice.php      → Rechnung erzeugen für eine Bestellung
-│   ├── **addProduct.php**         ← NEU: Produkt anlegen (mit Bild)
-│   ├── **updateProduct.php**      ← NEU: Produkt bearbeiten
-│   ├── **deleteProduct.php**      ← NEU: Produkt löschen
-│   └── **getProducts.php**        ← NEU: Produktliste für Admin laden
+├── logic/
+│   ├── login.php                  → Login-Verarbeitung
+│   ├── register.php               → Registrierung
+│   ├── searchTickets.php          → Tickets als JSON (GET)
+│   ├── addToCart.php              → Produkt in Warenkorb legen
+│   ├── getCartItems.php           → Warenkorb als JSON
+│   ├── submitOrder.php            → Bestellung speichern
+│   ├── getOrders.php              → Bestellungen abrufen
+│   ├── getOrdersByUser.php        → Bestellungen eines bestimmten Nutzers
+│   ├── useVoucher.php             → Gutschein anwenden
+│   ├── createVoucher.php          → Gutschein erstellen (Admin)
+│   ├── getVouchers.php            → Gutscheinliste abrufen (Admin)
+│   ├── generateInvoice.php        → Rechnung erstellen
+│   ├── getInvoiceData.php         → Rechnungsdaten für Anzeige abrufen
+│   ├── addProduct.php             → Produkt anlegen (inkl. Bild)
+│   ├── updateProduct.php          → Produkt bearbeiten
+│   ├── deleteProduct.php          → Produkt löschen
+│   ├── getProducts.php            → Produktliste laden (Admin)
+│   └── getUsers.php               → Nutzerliste abrufen (Admin)
 │
-├── /productpictures/
-│   └── *.png                → Ticket/Event-Bilder
+├── productpictures/
+│   └── *.png                      → Produktbilder (Tickets)
+```
 
- ```
-## Technologien
+---
 
-- **Frontend**: HTML, CSS, JavaScript, AJAX
-- **Backend**: PHP (mit `mysqli`), objektorientiert
-- **Datenbank**: MySQL
-- **Struktur**: Trennung von Frontend & Backend gemäß Spezifikation
+## Verwendete Technologien
+
+| Bereich       | Technologie        |
+|---------------|--------------------|
+| Frontend      | HTML, CSS, JavaScript, AJAX |
+| Backend       | PHP (OOP, mysqli)  |
+| Datenbank     | MySQL              |
+| Struktur      | Klare Trennung von Frontend & Backend |
+
+---
+
+## Benutzerrollen
+
+- Benutzer:
+  - Registrierung / Login
+  - Tickets durchsuchen und kaufen
+  - Warenkorb nutzen
+  - Bestellungen einsehen
+  - Rechnungen ansehen
+
+- Admin:
+  - Ticket-/Produktverwaltung (CRUD)
+  - Gutscheinverwaltung
+  - Event-Bilder hochladen
+  - Nutzer- und Bestellübersicht einsehen
+  - Rechnungsdaten abrufen
+
+---
+
+## Neue Features (Stand Mai 2025)
+
+- Admin-Produktverwaltung:
+  - Produkt anlegen, bearbeiten, löschen
+  - Verwaltung per `products_admin.html` und `productAdmin.js`
+- Gutscheine:
+  - Erstellung (`createVoucher.php`)
+  - Anwendung (`useVoucher.php`)
+  - Verwaltung (`getVouchers.php`)
+- Rechnungen:
+  - Automatisch erzeugt nach Bestellung
+  - Datenabruf über `getInvoiceData.php`
+  - Anzeige via `invoice.js` / `invoice.html`
+- Nutzerverwaltung（Admin）:
+  - Vollständige Liste über `getUsers.php`
+- Benutzerbezogene Bestellabfrage:
+  - `getOrdersByUser.php`
+
+---
+
+## Hinweise zur Nutzung
+
+- Projekt benötigt lokale PHP + MySQL Umgebung (z. B. XAMPP)
+- Datenbankstruktur ist über `dbacess.php` angebunden
+- Produktbilder bitte in `backend/productpictures/` hochladen
+- Admin-Zugang über Direktaufruf `products_admin.html`
