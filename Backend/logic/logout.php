@@ -19,7 +19,7 @@ if (isset($_COOKIE['rememberme'])) {
 // WICHTIG: Nur JSON ausgeben!
 header("Content-Type: application/json");
 echo json_encode(["success" => true]);
-header("Location: ../../Frontend/sites/index.html");
+header("Location: ../../Frontend/sites/index.php");
 exit;
 
 

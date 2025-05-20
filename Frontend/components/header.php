@@ -27,7 +27,7 @@ $username = $_SESSION['username'] ?? 'Benutzer';
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../sites/index.html">
+    <a class="navbar-brand" href="../sites/index.php">
       <img src="../res/img/logo.png" alt="Logo" style="height: 40px;">
     </a>
 
