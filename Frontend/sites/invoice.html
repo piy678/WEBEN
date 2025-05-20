@@ -9,10 +9,19 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
+<style>
+  #print-btn {
+    display: inline-block;
+    padding: 6px 20px;
+    font-size: 0.9rem;
+    margin: 0 auto;
+  }
+</style>
 <body>
   <h1>Rechnung</h1>
   <div id="invoice-data"></div> 
-  <button id="print-btn" onclick="window.print()">Als PDF speichern</button>
+  <button id="print-btn" class="no-print btn btn-secondary" onclick="window.print()">Als PDF speichern<br></button>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="../js/invoice.js"></script>

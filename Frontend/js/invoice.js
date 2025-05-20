@@ -1,41 +1,50 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const orderId = params.get("order_id");
-  
-    if (!orderId) {
-      document.getElementById("invoice-data").innerHTML = "<p>Keine Bestellung angegeben.</p>";
-      return;
-    }
+  const orderId = new URLSearchParams(window.location.search).get("order_id");
+  if (!orderId) {
+    document.getElementById("invoice-data").innerHTML = "<p>Keine Bestellung angegeben.</p>";
+    return;
+  }
 
-    fetch("../../Backend/logic/getOrderItems.php?order_id=" + orderId)
-      .then(res => res.json())
-      .then(data => {
-        if (!data.length) {
-          document.getElementById("invoice-data").innerHTML = "<p>Keine Daten zur Bestellung gefunden.</p>";
-          return;
-        }
-  
-        let html = `<p>Bestellung #${orderId}</p><table>
-          <tr><th>Artikel</th><th>Menge</th><th>Preis</th></tr>`;
-  
-        let total = 0;
-  
-        data.forEach(item => {
-          const line = item.quantity * item.price;
-          total += line;
-          html += `<tr>
-            <td>${item.title}</td>
-            <td>${item.quantity}</td>
-            <td>${line.toFixed(2)} €</td>
-          </tr>`;
-        });
-  
+  fetch("../../Backend/logic/getInvoiceData.php?order_id=" + orderId)
+    .then(res => res.json())
+    .then(data => {
+      if (!data || !data.artikel) {
+        document.getElementById("invoice-data").innerHTML = "<p>Fehler beim Laden der Daten.</p>";
+        return;
+      }
+
+      const anschrift = data.anschrift;
+      const artikel = data.artikel;
+      const datum = new Date(data.datum).toLocaleDateString("de-DE");
+      const rechnungsnummer = data.rechnungsnummer;
+
+      let html = `
+        <h2>Rechnung Nr. ${rechnungsnummer}</h2>
+        <p><strong>Datum:</strong> ${datum}</p>
+        <p><strong>Rechnung an:</strong><br>
+        ${anschrift.vorname} ${anschrift.nachname}<br>
+        ${anschrift.adresse}<br>
+        ${anschrift.plz} ${anschrift.ort}</p>
+        <table class="table mt-4">
+          <thead><tr><th>Artikel</th><th>Menge</th><th>Preis</th></tr></thead>
+          <tbody>`;
+
+      let total = 0;
+      artikel.forEach(item => {
+        const line = item.quantity * item.price;
+        total += line;
         html += `<tr>
-          <td colspan="2"><strong>Gesamt</strong></td>
-          <td><strong>${total.toFixed(2)} €</strong></td>
-        </tr></table>`;
-  
-        document.getElementById("invoice-data").innerHTML = html;
+          <td>${item.title}</td>
+          <td>${item.quantity}</td>
+          <td>${line.toFixed(2)} €</td>
+        </tr>`;
       });
-  });
-  
+
+      html += `<tr>
+        <td colspan="2"><strong>Gesamt</strong></td>
+        <td><strong>${total.toFixed(2)} €</strong></td>
+      </tr></tbody></table>`;
+
+      document.getElementById("invoice-data").innerHTML = html;
+    });
+});

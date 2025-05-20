@@ -17,7 +17,10 @@
                 <strong>Bestellung #${order.id}</strong><br>
                 Datum: ${order.created_at} – Gesamt: ${order.total_price} €<br>
                 <button class="btn btn-primary btn-sm" onclick="showOrderDetails(${order.id})">Details</button>
-                <button class="btn btn-secondary btn-sm" onclick="window.location.href='invoice.html?order_id=${order.id}'">Rechnung anzeigen</button>
+                <button class="btn btn-secondary btn-sm"
+  onclick="window.open('invoice.html?order_id=' + ${order.id}, '_blank')">
+  Rechnung anzeigen
+</button>
               </div>
               <hr>
             `;
