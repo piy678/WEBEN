@@ -46,12 +46,15 @@ function loadVouchers() {
         return;
       }
 
-      list.innerHTML = vouchers.map(v =>
-        `<div class="voucher">
-          <strong>Code:</strong> ${v.code}<br>
-          <strong>Wert:</strong> ${v.value} €<br>
-          <strong>Gültig bis:</strong> ${v.valid_until}<br>
-          <strong>Status:</strong> <span class="${v.status.toLowerCase()}">${v.status}</span>
+       list.innerHTML = vouchers.map(v =>
+        `<div class="card">
+          <div class="card-content">
+            <h3>Gutschein</h3>
+            <p><strong>Code:</strong> ${v.code}</p>
+            <p><strong>Wert:</strong> ${v.value} €</p>
+            <p><strong>Gültig bis:</strong> ${v.valid_until}</p>
+            <p><strong>Status:</strong> <span class="${v.status.toLowerCase()}">${v.status}</span></p>
+          </div>
         </div>`
       ).join("");
     });
