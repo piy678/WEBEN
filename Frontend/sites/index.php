@@ -37,12 +37,13 @@ $username = $_SESSION['username'] ?? null;
       <div class="container">
         <h1 class="display-4">SmartTicketing</h1>
         <p class="lead">Finden Sie den passenden Event für Ihre Interessen</p>
-
+</p>
         <?php if ($username): ?>
           <h2 class="mt-4">Willkommen, <strong><?= htmlspecialchars($username) ?></strong>!</h2>
           <a href="tickets.html" class="btn btn-success btn-lg mt-3">Zu den Tickets</a> <br>
-          <a href="../backend/logic/logout.php" class="btn btn-danger btn-lg mt-3">Abmelden</a>
+          <a href="../../Backend/logic/logout.php" class="btn btn-danger btn-lg mt-3">Abmelden</a>
         <?php else: ?>
+          <p class="lead">Jetzt anmelden oder registrieren</p>
           <a href="registration.html" class="btn btn-primary btn-lg mt-3">Registrierung</a> <br>
           <a href="login.html" class="btn btn-primary btn-lg mt-3">Login</a>
         <?php endif; ?>
