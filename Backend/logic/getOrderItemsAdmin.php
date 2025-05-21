@@ -12,6 +12,7 @@ if (!isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
 $orderId = isset($_GET["order_id"]) ? intval($_GET["order_id"]) : 0;
 
 if ($orderId <= 0) {
+    http_response_code(403);
     echo json_encode([]);
     exit;
 }

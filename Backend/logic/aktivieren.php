@@ -15,6 +15,7 @@ header("Location: ../../Frontend/sites/admin_userliste.php");
 exit;
 
 } else {
+    http_response_code(403);
     echo "Ungültiger Zugriff.";
 }
 ?>

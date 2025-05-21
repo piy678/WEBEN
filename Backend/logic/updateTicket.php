@@ -38,6 +38,7 @@ try {
     if ($stmt->affected_rows > 0) {
         echo json_encode(['status' => 'success', 'rows_updated' => $stmt->affected_rows]);
     } else {
+        http_response_code(403);
         echo json_encode(['status' => 'warning', 'message' => 'Kein Datensatz geändert.']);
     }
 

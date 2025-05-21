@@ -11,6 +11,7 @@ $value = floatval($data["value"] ?? 0);
 $validUntil = $data["valid_until"] ?? null;
 
 if ($value <= 0 || !$validUntil) {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Ungültige Eingabe."]);
     exit;
 }

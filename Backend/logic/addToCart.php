@@ -6,6 +6,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $id = $data["id"] ?? null;
 
 if (!$id) {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Kein Produkt angegeben."]);
     exit;
 }

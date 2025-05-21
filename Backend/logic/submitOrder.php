@@ -3,11 +3,13 @@ session_start();
 require_once("../config/db.php");
 
 if (!isset($_SESSION["cart"]) || empty($_SESSION["cart"])) {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Warenkorb ist leer."]);
     exit;
 }
 
 if (!isset($_SESSION['user_id'])) {
+    http_response_code(403);
     echo json_encode([
         "success" => false,
         "message" => "Sie müssen eingeloggt sein, um eine Bestellung abzuschließen."
@@ -19,6 +21,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $paymentMethod = $data['payment'] ?? '';
 
 if (!$paymentMethod) {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Zahlungsart fehlt."]);
     exit;
 }

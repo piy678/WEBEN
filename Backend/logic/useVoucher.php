@@ -7,6 +7,7 @@ $total = floatval($data["total"] ?? 0.0);
 require_once("../config/db.php");
 
 if (!$code) {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Kein Gutscheincode angegeben."]);
     exit;
 }
@@ -24,6 +25,7 @@ if ($voucher = mysqli_fetch_assoc($result)) {
         "newTotal" => number_format($newTotal, 2, '.', '') 
     ]);
 } else {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Ungültiger oder abgelaufener Gutschein."]);
 }
 ?>

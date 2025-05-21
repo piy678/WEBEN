@@ -69,6 +69,7 @@ if ($result) {
         $tickets[] = $row;
     }
 } else {
+    http_response_code(403);
     echo json_encode(["error" => $mysqli->error]);
     exit;
 }

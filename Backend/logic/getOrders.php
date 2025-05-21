@@ -7,6 +7,7 @@ require_once("../config/db.php");
 $userId = $_SESSION["user_id"] ?? null;
 
 if (!$userId) {
+    http_response_code(403);
     echo json_encode([]); // kein Benutzer eingeloggt
     exit;
 }

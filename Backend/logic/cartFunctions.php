@@ -20,6 +20,7 @@ if ($action === 'updateQuantity') {
         $_SESSION["cart"][$id]["quantity"] = $quantity;
         echo json_encode(["success" => true]);
     } else {
+        http_response_code(403);
         echo json_encode(["success" => false, "message" => "Produkt nicht im Warenkorb."]);
     }
     exit;
@@ -33,6 +34,7 @@ if ($action === 'removeFromCart') {
         unset($_SESSION["cart"][$id]);
         echo json_encode(["success" => true]);
     } else {
+        http_response_code(403);
         echo json_encode(["success" => false, "message" => "Produkt nicht gefunden."]);
     }
     exit;
@@ -51,4 +53,5 @@ if ($action === 'getCartCount') {
 }
 
 // Ungültige Aktion
+http_response_code(403);
 echo json_encode(["success" => false, "message" => "Keine gültige Aktion."]);

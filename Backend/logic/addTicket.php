@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $stmt = $mysqli->prepare("INSERT INTO tickets (title, category, price, image, rating) VALUES (?, ?, ?, ?, ?)");
     if (!$stmt) {
+        http_response_code(403);
         echo json_encode(['status' => 'error', 'message' => 'SQL Error: ' . $mysqli->error]);
         exit;
     }
@@ -32,5 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     echo json_encode(['status' => 'success']);
 } else {
+    http_response_code(403);
     echo json_encode(['status' => 'error', 'message' => 'Invalid request method']);
 }

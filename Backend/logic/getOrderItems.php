@@ -7,6 +7,7 @@ $userId = $_SESSION["user_id"] ?? null;
 $orderId = $_GET["order_id"] ?? null;
 
 if (!$userId || !$orderId) {
+  http_response_code(403);
     echo json_encode([]);
     exit;
 }

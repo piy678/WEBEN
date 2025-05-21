@@ -4,6 +4,7 @@ header('Content-Type: application/json');
 require_once '../config/db.php';
 
 if (!isset($_SESSION['user_id'])) {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Nicht eingeloggt."]);
     exit;
 }
@@ -18,6 +19,7 @@ $result = $stmt->get_result();
 $record = $result->fetch_assoc();
 
 if (!$record || !password_verify($pw, $record['passwort'])) {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "asswort ist falsch."]);
     exit;
 }
@@ -39,5 +41,6 @@ $success = $update->execute();
 if ($success) {
     echo json_encode(["success" => true, "message" => "Daten wurden aktualisiert."]);
 } else {
+    http_response_code(403);
     echo json_encode(["success" => false, "message" => "Fehler beim Speichern."]);
 }
