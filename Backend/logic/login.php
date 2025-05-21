@@ -53,7 +53,7 @@ if ($user = $result->fetch_assoc()) {
         echo json_encode([
             'success' => true,
             'redirect' => $user['is_admin'] 
-                ? '../../Frontend/sites/products_admin.html'
+                ? '../../Frontend/sites/products_admin.php'
                 : '../../Frontend/sites/tickets.html'
         ]);
         exit;
