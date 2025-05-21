@@ -7,6 +7,7 @@ header('Content-Type: application/json');
 
 require_once('../config/db.php');
 
+// Post-Daten empfangen
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['name'];
     $category = $_POST['category'];
@@ -20,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES['image']['tmp_name'], "../productpictures/" . $imageName);
     }
 
-    
+    //Datenbank eintrag
     $stmt = $mysqli->prepare("INSERT INTO tickets (title, category, price, image, rating) VALUES (?, ?, ?, ?, ?)");
     if (!$stmt) {
         http_response_code(403);

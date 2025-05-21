@@ -4,7 +4,7 @@ session_start();
 
 $orderId = intval($_GET['order_id'] ?? 0);
 $userId = $_SESSION['user_id'] ?? null;
-
+// Fehlerbehandlung
 if (!$orderId || !$userId) {
   http_response_code(400);
   echo json_encode(["error" => "Ungültiger Zugriff"]);
@@ -31,7 +31,7 @@ $stmt2 = $mysqli->prepare("
 $stmt2->bind_param("i", $orderId);
 $stmt2->execute();
 $items = $stmt2->get_result()->fetch_all(MYSQLI_ASSOC);
-
+// Bestellpositionen formatieren
 echo json_encode([
   "rechnungsnummer" => "R-" . date("Ymd") . "-$orderId",
   "datum" => $meta['created_at'],

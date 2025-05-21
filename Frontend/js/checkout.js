@@ -1,6 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", loadCartSummary);
-
+//den Warenkorb laden und die Daten anzeigen
 function loadCartSummary() {
   fetch("../../Backend/logic/getCartItems.php")
     .then(res => res.json())
@@ -19,14 +19,14 @@ function loadCartSummary() {
       document.getElementById("total-price").textContent = total.toFixed(2) + " €";
     });
 }
-
+//Gutschein anwenden
 function applyVoucher() {
   const code = document.getElementById("voucher").value;
 
   // Aktuellen Preis extrahieren (aus dem DOM, z. B. "19.99 €" → 19.99)
   const priceText = document.getElementById("total-price").textContent;
   const total = parseFloat(priceText.replace("€", "").trim());
-
+//Gutschein an Backend senden
   fetch("../../Backend/logic/useVoucher.php", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -43,7 +43,7 @@ function applyVoucher() {
     });
 }
 
-
+//Bestellung abschicken
 function submitOrder() {
   const paymentMethod = document.getElementById("payment-method").value;
 

@@ -1,7 +1,7 @@
+//user_id aus der URL holen 
 document.addEventListener("DOMContentLoaded", () => {
   const userId = new URLSearchParams(window.location.search).get("user_id");
   if (!userId) return;
-
   fetch(`../../Backend/logic/getOrdersByUser.php?user_id=${userId}`)
     .then(res => res.json())
     .then(orders => {
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
         container.innerHTML = "<p>Keine Bestellungen gefunden.</p>";
         return;
       }
-
+//Bestellungen der Reihe nach anzeigen je nach id
      orders.forEach(order => {
   const div = document.createElement("div");
   div.className = "card mb-3 p-3";
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     });
 });
-
+//Bestellungs Positionen laden nach den Klick auf Details und es löschen können
 function loadOrderItems(orderId) {
   fetch(`../../Backend/logic/getOrderItemsAdmin.php?order_id=${orderId}`)
     .then(res => res.json())
@@ -60,7 +60,7 @@ function loadOrderItems(orderId) {
     });
 }
 
-
+//Bestellpositionen löschen
 function deleteOrderItem(itemId, orderId) {
   fetch(`../../Backend/logic/deleteOrderItem.php?item_id=${itemId}`)
     .then(res => res.json())
@@ -74,7 +74,7 @@ function deleteOrderItem(itemId, orderId) {
     .catch(() => alert("Fehler beim Löschen."));
 }
 
-
+//Gesamtpreis aktualisieren
 function updateTotalDisplay(orderId, newTotal) {
   const orderCard = document.getElementById(`order-${orderId}`);
   if (!orderCard) return;

@@ -50,7 +50,7 @@ $orderId = $stmt->insert_id;
 
 // Bestellpositionen speichern (sicher!)
 $itemStmt = $mysqli->prepare("INSERT INTO order_items (order_id, product_id, title, price, quantity) VALUES (?, ?, ?, ?, ?)");
-
+//Schleife durch den Warenkorb
 foreach ($_SESSION["cart"] as $item) {
     $pid = $item["id"];
     $title = $item["title"];
@@ -70,6 +70,6 @@ if (isset($_SESSION["voucher"])) {
 // Session leeren
 unset($_SESSION["cart"]);
 unset($_SESSION["voucher"]);
-
+//Json Antwort 
 echo json_encode(["success" => true]);
 ?>

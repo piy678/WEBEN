@@ -78,6 +78,7 @@ function removeFromCart(id) {
       console.error("Fehler beim Entfernen des Produkts:", error);
     });
 }
+// Gesamtpreis aktualisieren
   function updateCartCount() {
     fetch("../../Backend/logic/getCartItems.php")
       .then(res => res.json())
@@ -91,9 +92,9 @@ function removeFromCart(id) {
       })
       .catch(err => console.error("Fehler beim Laden des Warenkorb-Zählers:", err));
   }
-
+// Gesamtanzahl der Produkte im Warenkorb anzeigen
   document.addEventListener("DOMContentLoaded", updateCartCount);
-
+// Weiterleitung zur Kasse
 function goToCheckout() {
   alert("Zur Kasse geht's hier weiter...");
 }

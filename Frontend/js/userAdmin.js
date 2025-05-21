@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .then(users => {
       const table = document.getElementById("user-table");
       table.innerHTML = "";
-
+//Benutzer in HTML-Elemente umwandeln
       users.forEach(user => {
         const row = document.createElement("tr");
       row.innerHTML = `
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </form>
   </td>
 `;
-
+//Fügen Sie die Zeile zur HTML hinzu
 
         table.appendChild(row);
       });

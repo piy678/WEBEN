@@ -1,13 +1,13 @@
-function debounce(func, delay) {
+function debounce(func, delay) { //Funktion: verhindert zu häufiges Aufrufen von loadTickets bei schnellem Tippen
   let timer;
   return function () {
-    clearTimeout(timer);
-    timer = setTimeout(() => func.apply(this, arguments), delay);
+    clearTimeout(timer); // alten Timer löschen, falls Nutzer weiter tippt
+    timer = setTimeout(() => func.apply(this, arguments), delay); // neue Ausführung verzögert starten
   };
 }
-
+//Beim Laden der Seite sofort Tickets anzeigen
 document.addEventListener("DOMContentLoaded", loadTickets);
-
+//Filter-Elemente
 document.getElementById("category").addEventListener("change", loadTickets);
 document.getElementById("search").addEventListener("input", debounce(loadTickets, 300));
 document.getElementById("priceMin").addEventListener("input", debounce(loadTickets, 300));
@@ -15,15 +15,15 @@ document.getElementById("priceMax").addEventListener("input", debounce(loadTicke
 document.getElementById("rating").addEventListener("change", loadTickets);
 document.getElementById("onlyAvailable").addEventListener("change", loadTickets);
 
-
-function loadTickets() {
+//Tickets Anzeigen 
+function loadTickets() { //Werte aus den Filterfeldern lesen
   const category = document.getElementById("category").value;
   const search = document.getElementById("search").value;
   const minPrice = document.getElementById("priceMin").value;
   const maxPrice = document.getElementById("priceMax").value;
   const rating = document.getElementById("rating").value;
   const available = document.getElementById("onlyAvailable").checked ? 1 : 0;
-
+//Werte aus der URL holen und an das Backend senden
   const params = new URLSearchParams({
     category,
     search,
@@ -35,7 +35,7 @@ function loadTickets() {
 
   const url = "../../Backend/logic/getTickets.php?" + params.toString();
   console.log("→ Anfrage an:", url); 
-
+//Warenkorb Anfrage an Backend schicken und Tickets anzeigen
   fetch(url)
     .then(res => res.json())
     .then(data => updateTicketList(data))
@@ -44,7 +44,7 @@ function loadTickets() {
     });
 }
 
-
+//Ticketliste im HTML anzeigen
 function updateTicketList(data) {
   const container = document.getElementById("ticket-list");
   container.innerHTML = "";
@@ -63,7 +63,7 @@ function updateTicketList(data) {
     const imagePath = ticket.image && ticket.image.trim() !== ""
       ? `../../Backend/productpictures/${ticket.image}`
       : "../res/img/placeholder.jpg";
-
+//HTML-Karte zusammenbauen
     col.innerHTML = `
       <div class="card h-100 shadow-sm">
         <img src="${imagePath}" class="card-img-top" alt="${ticket.title}">
@@ -78,12 +78,12 @@ function updateTicketList(data) {
         </div>
       </div>
     `;
-
+// zur Seite hinzufügen
     container.appendChild(col);
   });
 }
 
-
+//Tickets in den Warenkorb hinzufügen
 function addToCart(id, title, price) {
   fetch("../../Backend/logic/addToCart.php", {
     method: "POST",
@@ -93,7 +93,7 @@ function addToCart(id, title, price) {
     .then(res => res.json())
     .then(data => {
       alert(data.message || "Zum Warenkorb hinzugefügt!");
-      if (typeof updateCartCount === "function") {
+      if (typeof updateCartCount === "function") { // Zähler im Header aktualisieren, wenn Funktion existiert
         updateCartCount();
       }
     })

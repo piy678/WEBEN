@@ -3,7 +3,7 @@ session_start();
 header("Content-Type: application/json");
 
 require_once("../config/db.php");
-
+// Überprüfen, ob der Benutzer eingeloggt ist
 $userId = $_SESSION["user_id"] ?? null;
 
 if (!$userId) {
@@ -21,7 +21,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 $orders = [];
-
+// Alle Bestellungen in ein Array speichern
 while ($row = $result->fetch_assoc()) {
     $orders[] = $row;
 }

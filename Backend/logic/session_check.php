@@ -2,6 +2,7 @@
 session_start();
 require_once '../../Backend/config/db.php';
 
+// Überprüfen, ob der Benutzer eingeloggt ist
 if (!isset($_SESSION['user_id']) && isset($_COOKIE['rememberme'])) {
     $conn = new mysqli($host, $user, $pass, $dbname);
     if (!$conn->connect_error) {

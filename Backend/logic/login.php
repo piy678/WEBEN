@@ -1,26 +1,26 @@
 <?php
 session_start();
 require_once '../config/db.php';
-
+// Überprüfen, ob die Eingaben vorhanden sind
 $identifier = $_POST['login'] ?? '';
 $password = $_POST['password'] ?? '';
 $remember = isset($_POST['remember']);
-
+// Überprüfen, ob die Eingaben leer sind
 if (!$identifier || !$password) {
     header("Location: ../../Frontend/sites/login.html?error=invalid");
     exit;
 }
-
+// Verbindung zur Datenbank
 $conn = new mysqli($host, $user, $pass, $dbname);
 if ($conn->connect_error) {
     die("Verbindungsfehler: " . $conn->connect_error);
 }
-
+// SQL-Abfrage vorbereiten um alle Benutzer zu finden, die entweder den Benutzernamen oder die E-Mail-Adresse haben
 $stmt = $conn->prepare("SELECT id, benutzername, passwort, is_admin, is_active FROM benutzer WHERE benutzername = ? OR email = ?");
 $stmt->bind_param("ss", $identifier, $identifier);
 $stmt->execute();
 $result = $stmt->get_result();
-
+// Überprüfen, ob ein Benutzer gefunden wurde
 if ($user = $result->fetch_assoc()) {
     if ($user["is_active"] == 0) {
         header("Location: ../../Frontend/sites/login.php?error=deactivated");
@@ -38,7 +38,7 @@ if ($user = $result->fetch_assoc()) {
             // Cookie setzen (30 Tage gültig)
             setcookie("rememberme", $token, time() + (86400 * 30), "/", "", false, true);
         }
-
+// Passwort überprüfen
     if (password_verify($password, $user['passwort'])) {
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['benutzername'];
@@ -52,6 +52,6 @@ if ($user = $result->fetch_assoc()) {
         exit;
     }
 }
-
+// Wenn die Anmeldedaten ungültig sind, zurück zur Login-Seite
 header("Location: ../../Frontend/sites/login.html?error=invalid");
 exit;

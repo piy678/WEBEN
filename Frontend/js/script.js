@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.appendChild(wrapper);
     });
 });
+// Produkte im Warenkorb Anzahl anzeigen
 function updateCartCount() {
   fetch("../../Backend/logic/getCartItems.php")
     .then(res => res.json())

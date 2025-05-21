@@ -1,43 +1,71 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de"> <!-- Sprache der Seite auf Deutsch eingestellt -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login-Seite für SmartTicketing. Melden Sie sich an, um Tickets zu kaufen und Ihre Bestellungen zu verwalten.">
-  <title>Registrierung</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../res/css/style.css">
-</head>
-<body>
-  <div class="container mt-5">
-  <div class="card p-4 mx-auto" style="max-width: 400px;">
-  <h2>Registrierung</h2>
+  <meta charset="UTF-8"> <!-- Zeichencodierung UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Design -->
+  <meta name="description" content="Login-Seite für SmartTicketing. Melden Sie sich an, um Tickets zu kaufen und Ihre Bestellungen zu verwalten."> <!-- Meta-Beschreibung für SEO -->
 
-  <form id="registerForm">
-    <input type="text" id="vorname" placeholder="Vorname" required><br>
-    <input type="text" id="nachname" placeholder="Nachname" required><br>
-    <input type="text" id="adresse" placeholder="Adresse" required><br>
-    <input type="text" id="plz" placeholder="PLZ" required><br>
-    <input type="text" id="ort" placeholder="Ort" required><br>
-    <input type="email" id="email" placeholder="Email" required><br>
-    <input type="text" id="benutzername" placeholder="Benutzername" required><br>
-    <input type="password" id="password" placeholder="Passwort" required><br>
-    <input type="password" id="passwordRepeat" placeholder="Passwort wiederholen" required><br>
-    <label for="zahlung">Zahlungsmethode:</label>
-    <select id="zahlung" name="zahlung" required>
-      <option value="">Bitte wählen</option>
-      <option value="Rechnung">Rechnung</option>
-      <option value="PayPal">PayPal</option>
-      <option value="Kreditkarte">Kreditkarte</option>
-    </select>
-    
-    <button type="submit">Registrieren</button>
-  </form>
-</div>
-</div>
+  <title>Registrierung</title> <!-- Titel der Seite im Browser -->
+
+  <!-- Bootstrap CSS für Styling -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <!-- Eigene Stylesheet-Datei -->
+  <link rel="stylesheet" href="../res/css/style.css">
+</head>
+
+<body>
+  <!-- Bootstrap-Container mit Abstand nach oben -->
+  <div class="container mt-5">
+    <!-- Bootstrap-Karte für zentriertes Formular -->
+    <div class="card p-4 mx-auto" style="max-width: 400px;">
+      <h2>Registrierung</h2> <!-- Überschrift -->
+
+      <!-- Registrierungsformular -->
+      <form id="registerForm">
+        <!-- Eingabe Vorname -->
+        <input type="text" id="vorname" placeholder="Vorname" required><br>
+        <!-- Eingabe Nachname -->
+        <input type="text" id="nachname" placeholder="Nachname" required><br>
+        <!-- Eingabe Adresse -->
+        <input type="text" id="adresse" placeholder="Adresse" required><br>
+        <!-- Eingabe Postleitzahl -->
+        <input type="text" id="plz" placeholder="PLZ" required><br>
+        <!-- Eingabe Ort -->
+        <input type="text" id="ort" placeholder="Ort" required><br>
+        <!-- Eingabe E-Mail -->
+        <input type="email" id="email" placeholder="Email" required><br>
+        <!-- Eingabe Benutzername -->
+        <input type="text" id="benutzername" placeholder="Benutzername" required><br>
+        <!-- Eingabe Passwort -->
+        <input type="password" id="password" placeholder="Passwort" required><br>
+        <!-- Passwort-Wiederholung -->
+        <input type="password" id="passwordRepeat" placeholder="Passwort wiederholen" required><br>
+
+        <!-- Auswahl der Zahlungsmethode -->
+        <label for="zahlung">Zahlungsmethode:</label>
+        <select id="zahlung" name="zahlung" required>
+          <option value="">Bitte wählen</option>
+          <option value="Rechnung">Rechnung</option>
+          <option value="PayPal">PayPal</option>
+          <option value="Kreditkarte">Kreditkarte</option>
+        </select>
+        
+        <!-- Absenden-Button -->
+        <button type="submit">Registrieren</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap JavaScript Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- jQuery für DOM-Interaktionen -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- JavaScript zur Validierung und Formularverarbeitung -->
   <script src="../js/registration.js"></script>
+  <!-- Allgemeine Skripte -->
   <script src="../js/script.js"></script>
 </body>
 </html>

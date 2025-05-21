@@ -1,10 +1,10 @@
 function loadOrders() {
-    fetch("../../Backend/logic/getOrders.php")
+    fetch("../../Backend/logic/getOrders.php") 
       .then(res => res.json())
       .then(data => {
         const container = document.getElementById("orders");
         container.innerHTML = "";
-  
+  //Bestellungen in HTML-Elemente umwandeln
         data.forEach(order => {
           container.innerHTML += `
             <div>
@@ -16,7 +16,7 @@ function loadOrders() {
         });
       });
   }
-  
+  //Bestellungs Positionen laden nach den Klick auf Details
   function showOrderDetails(orderId) {
     alert("Details für Bestellung " + orderId + " werden später angezeigt.");
   }

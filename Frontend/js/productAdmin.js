@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', loadTickets);
     const res = await fetch('../../Backend/logic/getTickets.php');
     const tickets = await res.json();
     const list = document.getElementById('ticketList');
-    
+    //Tickets in HTML umwandeln anzeigen mit Bild es löschen können und bearbeiten 
     list.innerHTML = tickets.map(t => `
       <div class="card p-2 mb-2"> 
         <strong>${t.title}</strong> (${t.category}) – ${t.price} €<br>
@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', loadTickets);
     `).join('');
   }
 
-  
+  //Ticket löschen
   async function deleteTicket(id) {
     if (!confirm("Wirklich löschen?")) return;
   
@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', loadTickets);
     loadTickets();
   }
   
-  
+  //Ticket erstellen oder aktualisieren
   document.getElementById('productForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -42,7 +42,7 @@ window.addEventListener('DOMContentLoaded', loadTickets);
     });
     const result = await response.json();
     document.getElementById('feedback').innerText = result.status;
-  
+  //Formular wird geleert
     e.target.reset();
 const form = document.getElementById('productForm');
 form.querySelectorAll('input[name="id"], input[name="currentImage"]').forEach(el => el.remove());

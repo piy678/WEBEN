@@ -10,11 +10,11 @@ if (!$id) {
     echo json_encode(["success" => false, "message" => "Kein Produkt angegeben."]);
     exit;
 }
-
+//leerer Warenkorb
 if (!isset($_SESSION["cart"])) {
     $_SESSION["cart"] = [];
 }
-
+//hinzufügen oder aktualisieren
 if (!isset($_SESSION["cart"][$id])) {
     $_SESSION["cart"][$id] = [
         "id" => $id,

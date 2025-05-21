@@ -1,37 +1,50 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de"> <!-- Sprache des Dokuments: Deutsch -->
 <head>
-  <meta charset="UTF-8">
-  <title>Gutscheinverwaltung</title>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <meta charset="UTF-8"> <!-- Zeichencodierung: UTF-8 -->
+  <title>Gutscheinverwaltung</title> <!-- Titel der Seite -->
+
+  <!-- Bootstrap CSS für Styling -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <!-- Eigene CSS-Datei -->
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
+
 <body>
+  <!-- Hauptbereich der Seite -->
+  <main class="container">
+    <!-- Formular zum Erstellen eines Gutscheins -->
+    <form id="voucherForm">
+      <h2>Gutschein erstellen</h2> <!-- Formularüberschrift -->
 
- <main class="container">
-  <form id="voucherForm">
-    <h2>Gutschein erstellen</h2>
+      <!-- Eingabe für Gutscheinwert -->
+      <label for="voucher_value">Wert in €</label>
+      <input type="number" id="voucher_value" placeholder="z.B. 10">
 
-    <label for="voucher_value">Wert in €</label>
-    <input type="number" id="voucher_value" placeholder="z.B. 10">
+      <!-- Eingabe für Gültigkeitsdatum -->
+      <label for="voucher_valid_until">Gültig bis</label>
+      <input type="date" id="voucher_valid_until">
 
-    <label for="voucher_valid_until">Gültig bis</label>
-    <input type="date" id="voucher_valid_until">
+      <!-- Button zum Erstellen des Gutscheins -->
+      <button type="submit" id="createBtn">Erstellen</button>
+    </form>
+  </main>
 
-    <button type="submit" id="createBtn">Erstellen</button>
-  </form>
-
-  
-</main>
-<div style="margin-top: 40px;">
+  <!-- Bereich zur Anzeige aller vorhandenen Gutscheine -->
+  <div style="margin-top: 40px;">
     <h2>Alle Gutscheine</h2>
-    <div id="voucher_list"></div>
+    <div id="voucher_list"></div> <!-- Dynamisch gefüllte Gutscheinliste -->
   </div>
 
+  <!-- JavaScript für Gutscheinlogik -->
+  <script src="../js/voucherAdmin.js"></script> <!-- Verwaltung der Gutscheine -->
+  <script src="../js/script.js"></script> <!-- Allgemeine Funktionen -->
 
-  <script src="../js/voucherAdmin.js"></script>
-  <script src="../js/script.js"></script>
+  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- jQuery für DOM-Interaktionen und AJAX -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
 </html>

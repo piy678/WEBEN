@@ -1,14 +1,14 @@
 document.getElementById("registerForm").addEventListener("submit", async function (e) {
     e.preventDefault();
-  
+  //Passwortfeld und Passwortwiederholung
     const password = document.getElementById("password").value;
     const passwordRepeat = document.getElementById("passwordRepeat").value;
-  
+  //Passwörter vergleichen
     if (password !== passwordRepeat) {
       alert("Passwörter stimmen nicht überein");
       return;
     }
-  
+  // Überprüfen, ob alle Felder ausgefüllt sind wenn speichern
     const user = {
       vorname: document.getElementById("vorname").value,
       nachname: document.getElementById("nachname").value,
@@ -20,7 +20,7 @@ document.getElementById("registerForm").addEventListener("submit", async functio
       password,
       zahlung: document.getElementById("zahlung").value
     };
-  
+  //backend die User Daten senden
    fetch('../../Backend/logic/registration.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

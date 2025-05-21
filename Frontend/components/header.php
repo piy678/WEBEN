@@ -1,11 +1,11 @@
 <?php
 require_once '../../Backend/config/db.php';
 require_once '../../Backend/logic/session_check.php';
-
+//Session Status überprüfen
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
+// Überprüfen, ob der Benutzer eingeloggt ist oder Admin
 $is_logged_in = isset($_SESSION['user_id']);
 $is_admin = $_SESSION['is_admin'] ?? false;
 $username = $_SESSION['username'] ?? 'Benutzer';
@@ -24,18 +24,18 @@ $username = $_SESSION['username'] ?? 'Benutzer';
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
 <body>
-
+<!--Navigationsleiste mit der Homapage und dem Logo-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
   <div class="container-fluid">
     <a class="navbar-brand" href="../sites/index.php">
       <img src="../res/img/logo.png" alt="Logo" style="height: 40px;">
     </a>
-
+<!-- Hamburger-Menü für kleine Bildschirme -->
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Navigation ein-/ausblenden">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+<!-- Navigationsbereich, der bei Klick ein-/ausgeklappt wird -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-center">
         <!-- Tickets immer sichtbar -->

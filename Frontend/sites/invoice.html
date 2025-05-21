@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de"> <!-- Sprache auf Deutsch gesetzt -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login-Seite für SmartTicketing. Melden Sie sich an, um Tickets zu kaufen und Ihre Bestellungen zu verwalten.">
-    
-  <title>Rechnung</title>
+  <meta charset="UTF-8"> <!-- Zeichencodierung -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Design -->
+  <meta name="description" content="Login-Seite für SmartTicketing. Melden Sie sich an, um Tickets zu kaufen und Ihre Bestellungen zu verwalten.">
+  
+  <title>Rechnung</title> <!-- Seitentitel im Browser -->
+
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+  <!-- Eigene CSS-Datei -->
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
+
+<!-- Inline-Styles -->
 <style>
+  /* Elemente mit der Klasse "no-print" werden beim Drucken ausgeblendet */
   @media print {
     .no-print {
       display: none !important;
     }
   }
 
+  /* Stil für PDF-Button */
   #print-btn {
     display: inline-block;
     padding: 6px 20px;
@@ -25,25 +33,35 @@
 </style>
 
 <body>
-  <div class="page-wrapper">
+  <div class="page-wrapper"> <!-- Seiten-Wrapper -->
     <main class="content container py-4 d-flex flex-column justify-content-between">
-  <!--<h1>Rechnung</h1>-->
-<div class="text-center mb-4">
-  <img src="../res/img/logo.png" alt="SmartTicketing Logo" style="height: 80px;">
-</div>
-  <div id="invoice-data"></div> 
-  
-  <div class="cart-summary mt-4 d-flex justify-content-between align-items-center flex-wrap">
-  <button id="pdf-download" class="btn btn-primary mb-3">Rechnung als PDF speichern</button>
-<div id="invoice-data"></div>
- </div>
-</main>
+      <!-- Logo oben zentriert -->
+      <div class="text-center mb-4">
+        <img src="../res/img/logo.png" alt="SmartTicketing Logo" style="height: 80px;">
+      </div>
 
+      <!-- Platzhalter für Rechnungsdaten (wird dynamisch gefüllt) -->
+      <div id="invoice-data"></div> 
+
+      <!-- Button + zweiter Container für Rechnungsinhalt -->
+      <div class="cart-summary mt-4 d-flex justify-content-between align-items-center flex-wrap">
+        <button id="pdf-download" class="btn btn-primary mb-3">Rechnung als PDF speichern</button>
+        <div id="invoice-data"></div> <!-- Doppelt vorhanden, ggf. ein Fehler? -->
+      </div>
+    </main>
   </div>
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-  <script src="../js/invoice.js"></script>
-  <script src="../js/script.js"></script>
+
+  <!-- jQuery für DOM-Manipulation -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- html2pdf.js zum Konvertieren von HTML zu PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Eigene Skripte -->
+  <script src="../js/invoice.js"></script> <!-- Hier wird vermutlich der Rechnungsinhalt eingefügt -->
+  <script src="../js/script.js"></script>   <!-- Allgemeine JS-Funktionen -->
 </body>
 </html>

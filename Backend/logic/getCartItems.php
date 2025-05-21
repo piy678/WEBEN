@@ -7,7 +7,7 @@ header("Content-Type: application/json");
 $cart = $_SESSION["cart"] ?? [];
 
 $result = [];
-
+//Schleife durch den Warenkorb
 foreach ($cart as $item) {
     if (
         isset($item["id"], $item["title"], $item["price"], $item["quantity"])

@@ -1,6 +1,6 @@
 <?php
-session_start();
-$username = $_SESSION['username'] ?? null;
+session_start();  // Startet die Session, um auf Session-Variablen zuzugreifen
+$username = $_SESSION['username'] ?? null; // Holt den Benutzernamen aus der Session, falls vorhanden
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -13,7 +13,7 @@ $username = $_SESSION['username'] ?? null;
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"/>
     <link rel="stylesheet" href="../res/css/style.css" />
- 
+  <!-- Zusätzliche Style-Regeln für Layout-Verhalten -->
   <style>
     html, body {
       height: 100%;
@@ -26,18 +26,20 @@ $username = $_SESSION['username'] ?? null;
     }
 
     main {
-      flex: 1;
+      flex: 1; /* Hauptbereich dehnt sich aus, damit Footer unten bleibt */
     }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100" style="color: black;">
-
+  <!-- Hauptinhalt -->
   <main class="flex-grow-1" style="color: black;">
-    <header class="bg-light py-5 text-center" style="color: black;">
+  <!-- Header-Bereich mit Begrüßung und Navigation -->  
+  <header class="bg-light py-5 text-center" style="color: black;">
       <div class="container">
         <h1 class="display-4">SmartTicketing</h1>
         <p class="lead">Finden Sie den passenden Event für Ihre Interessen</p>
 </p>
+<!-- Zeigt Begrüßung und Links je nach Login-Status -->
         <?php if ($username): ?>
           <h2 class="mt-4">Willkommen, <strong><?= htmlspecialchars($username) ?></strong>!</h2>
           <a href="tickets.html" class="btn btn-success btn-lg mt-3">Zu den Tickets</a> <br>
@@ -51,11 +53,13 @@ $username = $_SESSION['username'] ?? null;
       
     </header>
   </main>
+    <!-- Produktanzeige -->
 <div class="container mt-5">
     <h3 class="mb-4">Unsere Produkte</h3>
 
     <div id="carouselContainer"></div>
 </div>
+ <!-- JavaScript zur dynamischen Produktanzeige -->
     <script>
 fetch('../../Backend/logic/getProducts.php')
   .then(response => response.json())
@@ -97,6 +101,7 @@ fetch('../../Backend/logic/getProducts.php')
     }
   });
 </script>
+  <!-- Sektion mit Vorteilen -->
 <section class="bg-light text-center py-4 mt-5">
   <div class="container">
     <h4 class="mb-3">Was wir bieten</h4>
@@ -105,7 +110,7 @@ fetch('../../Backend/logic/getProducts.php')
     </p>
   </div>
 </section>
-
+<!-- Einbindung von Bootstrap, jQuery und eigenen Skripten -->
     <!-- Bootstrap + Custom JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"

@@ -1,7 +1,7 @@
 document.getElementById("editForm").addEventListener("submit", function (e) {
   e.preventDefault();
   const formData = new FormData(e.target);
-
+  //Formulardaten validieren
   fetch("../../Backend/logic/updateUser.php", {
     method: "POST",
     body: formData

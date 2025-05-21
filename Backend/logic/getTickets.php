@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../../Backend/config/db.php'; 
-
+//Kategorie und Filter-Parameter
 $category = isset($_GET['category']) ? $_GET['category'] : 'all';
 $search = $_GET['search'] ?? '';
 $minPrice = $_GET['minPrice'] ?? '';
@@ -25,7 +25,7 @@ if ($category !== 'all') {
     $params[] = strtolower($category);
     $types .= "s";
 }
-
+// Suchbegriff
 if (!empty($search)) {
     $sql .= " AND title LIKE ?";
     $params[] = '%' . $search . '%';
@@ -63,7 +63,7 @@ if (!empty($params)) {
 
 $stmt->execute();
 $result = $stmt->get_result();
-
+// Überprüfen, ob die Abfrage erfolgreich war und wenn ja, die Ergebnisse speichern
 if ($result) {
     while ($row = $result->fetch_assoc()) {
         $tickets[] = $row;

@@ -2,7 +2,7 @@
 session_start();
 header("Content-Type: application/json");
 require_once("../config/db.php");
-
+//Überprüfen, ob der Benutzer eingeloggt ist und ob die Bestellung existiert
 $userId = $_SESSION["user_id"] ?? null;
 $orderId = $_GET["order_id"] ?? null;
 
@@ -11,7 +11,7 @@ if (!$userId || !$orderId) {
     echo json_encode([]);
     exit;
 }
-
+// Überprüfen, ob die Bestellung zu diesem Benutzer gehört
 $stmt = $mysqli->prepare("
   SELECT oi.title, oi.quantity, oi.price
   FROM order_items oi

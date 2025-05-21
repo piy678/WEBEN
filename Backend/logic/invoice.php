@@ -2,7 +2,7 @@
 require_once '../config/db.php';
 
 session_start();
-
+// Überprüfen, ob der Benutzer eingeloggt ist
 $orderId = $_GET['order_id'] ?? null;
 $userId = $_SESSION['user_id'] ?? null;
 
@@ -30,7 +30,7 @@ $html = "<h1>Rechnung #$orderId</h1>";
 $html .= "<p>Datum: " . date("d.m.Y") . "</p>";
 $html .= "<table border='1' cellspacing='0' cellpadding='5'>";
 $html .= "<tr><th>Artikel</th><th>Menge</th><th>Preis</th></tr>";
-
+// Bestellpositionen durchlaufen und HTML-Tabellenzeilen erstellen
 $total = 0;
 while ($row = $result->fetch_assoc()) {
     $line = $row['quantity'] * $row['price'];
@@ -41,8 +41,6 @@ while ($row = $result->fetch_assoc()) {
               </tr>";
     $total += $line;
 }
-
+// Gesamtsumme hinzufügen
 $html .= "<tr><td colspan='2'><strong>Gesamt</strong></td><td><strong>" . number_format($total, 2) . " €</strong></td></tr>";
 $html .= "</table>";
-
-// PDF generieren

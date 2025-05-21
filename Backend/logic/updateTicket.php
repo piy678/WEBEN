@@ -1,8 +1,9 @@
 <?php
 header('Content-Type: application/json');
 require_once('../config/db.php');
-
+//Try-Catch-Block für Fehlerbehandlung
 try {
+    //Post Anfrage prüfen
     if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
         throw new Exception("Ungültige Anfrage.");
     }
@@ -31,10 +32,10 @@ try {
     if (!$stmt) {
         throw new Exception("SQL-Fehler: " . $mysqli->error);
     }
-
+// Bind-Parameter
     $stmt->bind_param("sssddsi", $title, $description, $category, $rating, $price, $imageName, $id);
     $stmt->execute();
-
+// Überprüfen, ob die Aktualisierung erfolgreich war
     if ($stmt->affected_rows > 0) {
         echo json_encode(['status' => 'success', 'rows_updated' => $stmt->affected_rows]);
     } else {
@@ -43,6 +44,7 @@ try {
     }
 
     $stmt->close();
+    // Verbindung schließen
 } catch (Exception $e) {
     echo json_encode([
         'status' => 'error',

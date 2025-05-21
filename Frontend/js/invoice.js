@@ -1,10 +1,11 @@
+//Bestell-ID speichern und Rechnungsdaten laden und wenn keine Bestellung vorhanden ist, dann eine Fehlermeldung anzeigen
 document.addEventListener("DOMContentLoaded", () => {
   const orderId = new URLSearchParams(window.location.search).get("order_id");
   if (!orderId) {
     document.getElementById("invoice-data").innerHTML = "<p>Keine Bestellung angegeben.</p>";
     return;
   }
-
+//Lade die Rechnungsdaten
   fetch("../../Backend/logic/getInvoiceData.php?order_id=" + orderId)
     .then(res => res.json())
     .then(data => {
@@ -12,12 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("invoice-data").innerHTML = "<p>Fehler beim Laden der Daten.</p>";
         return;
       }
-
+//Daten von der Bestellung anzeigen und dem Unternehmen
       const anschrift = data.anschrift;
       const artikel = data.artikel;
       const datum = new Date(data.datum).toLocaleDateString("de-DE");
       const rechnungsnummer = data.rechnungsnummer;
-
+//html für die Rechnung erstellen
       let html = `
         <h2>Rechnung Nr. ${rechnungsnummer}</h2>
         <p><strong>Datum:</strong> ${datum}</p>
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <table class="table mt-4">
           <thead><tr><th>Artikel</th><th>Menge</th><th>Preis</th></tr></thead>
           <tbody>`;
-
+//Gesamtpreis der Artikel berechnen und anzeigen
       let total = 0;
       artikel.forEach(item => {
         const line = item.quantity * item.price;
@@ -53,11 +54,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <td colspan="2"><strong>Gesamt</strong></td>
         <td><strong>${total.toFixed(2)} €</strong></td>
       </tr></tbody></table>`;
-
+//in invoice-data div einfügen
       document.getElementById("invoice-data").innerHTML = html;
     });
 });
-
+//Rechnung als PDF herunterladen
 document.getElementById("pdf-download").addEventListener("click", () => {
   const element = document.getElementById("invoice-data");
 
@@ -68,12 +69,12 @@ document.getElementById("pdf-download").addEventListener("click", () => {
     html2canvas:  {
       scale: 2,
       useCORS: true,
-      scrollY: 0 // <- wichtig für volle Höhe
+      scrollY: 0 
     },
     jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
     pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] } // automatische Umbrüche
   };
-
+// Konfiguration für den PDF-Download
   html2pdf().set(opt).from(element).save();
 });
 

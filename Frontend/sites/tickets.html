@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de"> <!-- Sprache des Dokuments: Deutsch -->
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tickets durchsuchen</title>
+  <meta charset="UTF-8"> <!-- Zeichencodierung: UTF-8 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsives Layout -->
+  <title>Tickets durchsuchen</title> <!-- Titel im Browser-Tab -->
+
+  <!-- Bootstrap CSS für Styling -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Eigene CSS-Datei -->
   <link rel="stylesheet" href="../res/css/style.css">
 </head>
+
 <body>
+  <!-- Überschrift der Seite -->
   <h2>Tickets Suchen</h2>
+
+  <!-- Filter: Kategorie auswählen -->
   <label for="category">Kategorie wählen:</label>
   <select id="category">
     <option value="all">Alle</option>
@@ -18,40 +26,46 @@
     <option value="konzert">Konzert</option>
   </select>
 
-<!-- Such- & Filterelemente -->
-<input type="text" id="search" placeholder="Titel suchen..." />
+  <!-- Textsuche nach Ticket-Titel -->
+  <input type="text" id="search" placeholder="Titel suchen..." />
 
-<label>Min Preis:</label>
-<input type="number" id="priceMin" />
+  <!-- Filter: Minimaler Preis -->
+  <label>Min Preis:</label>
+  <input type="number" id="priceMin" />
 
-<label>Max Preis:</label>
-<input type="number" id="priceMax" />
+  <!-- Filter: Maximaler Preis -->
+  <label>Max Preis:</label>
+  <input type="number" id="priceMax" />
 
-<label>Mind. Bewertung:</label>
-<select id="rating">
-  <option value="0">Alle</option>
-  <option value="1">1+</option>
-  <option value="2">2+</option>
-  <option value="3">3+</option>
-  <option value="4">4+</option>
-  <option value="5">5</option>
-</select>
+  <!-- Filter: Mindestbewertung -->
+  <label>Mind. Bewertung:</label>
+  <select id="rating">
+    <option value="0">Alle</option>
+    <option value="1">1+</option>
+    <option value="2">2+</option>
+    <option value="3">3+</option>
+    <option value="4">4+</option>
+    <option value="5">5</option>
+  </select>
 
-<label>
-  <input type="checkbox" id="onlyAvailable" />
-  Nur verfügbare anzeigen
-</label>
+  <!-- Filter: Nur verfügbare Tickets anzeigen -->
+  <label>
+    <input type="checkbox" id="onlyAvailable" />
+    Nur verfügbare anzeigen
+  </label>
 
-<!--<button onclick="loadTickets()">Filtern</button>-->
+  <!-- Optionaler Button zum Auslösen des Filters (auskommentiert) -->
+  <!--<button onclick="loadTickets()">Filtern</button>-->
 
-<!-- Bereich für Ticket-Anzeige -->
-<div id="ticket-list"></div>
+  <!-- Bereich für die dynamisch angezeigte Ticketliste -->
+  <div id="ticket-list"></div>
 
-  
-  <script src="../js/script.js"></script>
-  
-  <script src="../js/tickets.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <!-- Eigene Skripte -->
+  <script src="../js/script.js"></script> <!-- Allgemeine Funktionen -->
+  <script src="../js/tickets.js"></script> <!-- Ticket-Filter-Logik -->
+
+  <!-- Bootstrap + jQuery für Funktionalität -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
 </html>

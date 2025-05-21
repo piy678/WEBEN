@@ -1,3 +1,4 @@
+//Html user-data hinzufügen der Daten
 document.addEventListener("DOMContentLoaded", () => {
   fetch("../../Backend/logic/getUserData.php")
     .then(res => res.json())
