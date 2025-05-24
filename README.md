@@ -140,6 +140,6 @@ backend/
 ## Hinweise zur Nutzung
 
 - Projekt benötigt lokale PHP + MySQL Umgebung (z. B. XAMPP)
-- Datenbankstruktur ist über `dbacess.php` angebunden
+- Datenbankstruktur ist über `db.php` angebunden
 - Produktbilder bitte in `backend/productpictures/` hochladen
 - Admin-Zugang über Direktaufruf `products_admin.html`
